@@ -38,13 +38,13 @@ interests:
 education:
   - degree: "Ph.D. in EECS"
     institution: "UC Berkeley"
-    start: "2024"
+    start: "2024-09-01"
     end: ""
     summary: "Ph.D. student in EECS at UC Berkeley, working in the Song Lab on computational biology and biological sequence modeling. Actively collaborating with the Lawrence Berkeley National Laboratory and the Innovative Genomics Institute."
   - degree: "B.Eng. in EE"
     institution: "Tsinghua University"
-    start: "2020"
-    end: "2024"
+    start: "2020-09-01"
+    end: "2024-07-01"
     summary: "B.Eng. in Electrical Engineering at Tsinghua University. Strong foundation in mathematics, physics, signal processing, electrical engineering and machine learning."
 experience:
   - role: "Research Assistant"
