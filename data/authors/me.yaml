@@ -5,76 +5,65 @@ name:
   display: "Yufan Cao"
   given: "Yufan"
   family: "Cao"
-  alternate: ""
-  pronunciation: ""
+  alternate: "曹宇凡"
+  pronunciation: "Cáo (pronounced `tsow', not `cow') Yǔfán"
   pronouns: "he/him"
-postnominals:
-  - "PhD"
-  - "MIEEE"
 status:
-  icon: "☕️"
-role: "Senior AI Research Scientist"
-bio: "Alex Johnson is a Senior AI Research Scientist at Meta AI. His research
-
-  has been published in top conferences like NeurIPS and ICML, with over
-
-  10,000 citations. Alex is passionate about pushing the boundaries of AI
-
-  while ensuring ethical development.\n"
-affiliations:
-  - name: "Meta AI"
-    url: "https://ai.meta.com/"
+  icon: "🧬"
+role: "PhD Student in EECS, UC Berkeley"
+bio: "PhD student in EECS at UC Berkeley (BAIR). Working on computational biology, genomic sequence modeling, and ML-based generative & evolutionary models 🧬🤖"
+affiliations: []
 links:
-  - icon: "at-symbol"
-    url: "mailto:alex.johnson@example.com"
-    label: "E-mail Me"
+  - icon: "hero/at-symbol"
+    url: "mailto:yufan.cao@berkeley.edu"
+    label: "Email"
   - icon: "brands/x"
-    url: "https://x.com/example"
+    url: "https://x.com/YufanCaoUCB"
   - icon: "brands/github"
-    url: "https://github.com/example"
+    url: "https://github.com/Accelerator-thu"
   - icon: "brands/linkedin"
-    url: "https://www.linkedin.com/in/example/"
+    url: "https://www.linkedin.com/in/yufan-cao-649868276/"
   - icon: "academicons/google-scholar"
-    url: "https://scholar.google.com/citations?user=example"
+    url: "https://scholar.google.com/citations?user=KAya1REAAAAJ&hl=en"
   - icon: "academicons/orcid"
-    url: "https://orcid.org/0000-0002-1825-0097"
+    url: "https://orcid.org/my-orcid?orcid=0009-0006-7747-5815"
+  - icon: "brands/instagram"
+    url: "https://www.instagram.com/yufancao66"
+    label: "Instagram"
 interests:
-  - "Large Language Models"
-  - "Computer Vision"
-  - "Reinforcement Learning"
-  - "AI Ethics"
+  - "AI for Science"
+  - "Evolution"
+  - "Genomics"
+  - "Deep Learning"
 education:
-  - degree: "PhD Computer Science"
-    institution: "Stanford University"
-    start: "2015-09-01"
-    end: "2019-06-30"
-    summary: "Thesis on scaling laws for neural language models. Published 5 papers in NeurIPS and ICML.\n"
-    button:
-      text: "Download dissertation"
-      url: "/resume.pdf"
-      icon: "hero/arrow-down-tray"
-  - degree: "MS Computer Science"
-    institution: "Carnegie Mellon University"
-    start: "2013-09-01"
-    end: "2015-05-31"
-  - degree: "BS Computer Science"
-    institution: "MIT"
-    start: "2009-09-01"
-    end: "2013-05-31"
+  - degree: "Ph.D. in EECS"
+    institution: "UC Berkeley"
+    start: "2024"
+    end: ""
+    summary: "Ph.D. student in EECS at UC Berkeley, working in the Song Lab on computational biology and biological sequence modeling. Actively collaborating with the Lawrence Berkeley National Laboratory and the Innovative Genomics Institute."
+  - degree: "B.Eng. in EE"
+    institution: "Tsinghua University"
+    start: "2020"
+    end: "2024"
+    summary: "B.Eng. in Electrical Engineering at Tsinghua University. Strong foundation in mathematics, physics, signal processing, electrical engineering and machine learning."
 experience:
-  - role: "Senior AI Research Scientist"
-    org: "Meta AI"
-    start: "2020-01-01"
-    summary: "Leading research on multimodal AI systems. Contributed to Llama 2 and other open-source models.\n"
-    button:
-      text: "View portfolio"
-      url: "/"
-      icon: "hero/arrow-down-tray"
-  - role: "AI Research Intern"
-    org: "OpenAI"
-    start: "2019-06-01"
-    end: "2019-12-31"
-    summary: "Worked on GPT-3 scaling. Co-authored paper on prompt engineering.\n"
+  - role: "Research Assistant"
+    org: "School of Computer Science, Carnegie Mellon University"
+    start: "2023-09"
+    end: "2023-12"
+    summary: "Research Assistant at CMU, working on single-cell genomics and spatial transcriptomics under the supervision of Prof. Jian Ma."
+  - role: "Research Assistant"
+    org: "Department of Electrical & Computer Engineering, Duke University"
+    start: "2022-09"
+    end: "2023-09"
+    summary: "Research Assistant at Duke University, working on neural architecture search and optimization methods for recommender systems."
+  - role: "Research Assistant"
+    org: "Department of Electronic Engineering, Tsinghua University"
+    start: "2021"
+    end: "2022"
+    summary: "Research Assistant at Tsinghua EE, focusing on symbolic regression in AI for Physics.
+
+      \n"
 skills:
   - name: "Technical Skills"
     items:
@@ -82,26 +71,20 @@ skills:
         level: 5
       - label: "Machine Learning"
         level: 5
-      - label: "Cloud Computing"
-        level: 4
   - name: "Research & Communication"
     items:
       - label: "Academic Writing"
         level: 5
-      - label: "Conference Presentations"
-        level: 4
-      - label: "Grant Proposals"
-        level: 4
 languages:
   - name: "English"
     level: 5
-    label: "Native"
-  - name: "Spanish"
-    level: 4
     label: "Fluent"
-awards:
-  - title: "Best Paper Award"
-    awarder: "NeurIPS"
-    date: "2022-12-01"
-    summary: "Awarded for groundbreaking work on efficient training of large models."
-    icon: "hero/trophy"
+  - name: "Mandarin Chinese"
+    level: 5
+    label: "Native"
+awards: []
+weight: null
+ids:
+  orcid: "0009-0006-7747-5815"
+  google_scholar: "KAya1REAAAAJ"
+  semantic_scholar: "2265364144"
