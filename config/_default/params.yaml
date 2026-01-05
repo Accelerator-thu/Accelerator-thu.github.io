@@ -13,7 +13,7 @@ hugoblox:
       secondary: "#6FA3A8"
       neutral: ""
   typography:
-    font: sans
+    font: serif
     size: md
   layout:
     radius: md
