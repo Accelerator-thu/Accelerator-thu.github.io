@@ -10,7 +10,7 @@ hugoblox:
     pack: minimal
     colors:
       primary: "#003262"
-      secondary: "#FDB515"
+      secondary: ""
       neutral: ""
   typography:
     font: sans
