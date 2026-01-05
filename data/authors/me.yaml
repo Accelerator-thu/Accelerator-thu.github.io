@@ -11,7 +11,9 @@ name:
 status:
   icon: "🧬"
 role: "Ph.D. Student in EECS @UCB"
-bio: "Hi! I'm a Ph.D. student in EECS at UC Berkeley (BAIR). I work on computational biology, genomic sequence modeling, and ML-based generative & evolutionary models. I'm interested in building AI models that can help us understand the natural world and improve human lives. 🧬🤖 \n\nFeel free to reach out to me for a coffee chat! I LOVE coffee! ☕️"
+bio: "Hi! I'm a Ph.D. student in EECS at UC Berkeley (BAIR). I work on computational biology, genomic sequence modeling, and ML-based generative and evolutionary models. I'm interested in building AI systems that help us understand the natural world and improve human lives 🧬🤖
+
+Feel free to reach out for a coffee chat - I really love coffee ☕️"
 affiliations: []
 links:
   - icon: "hero/at-symbol"
