@@ -14,7 +14,12 @@ sections:
     content:
       # Choose a user profile to display (a folder name within `content/authors/`)
       username: me
-      text: ''
+      text: |
+        Hi! I'm Yufan Cao and I'm a second-year Ph.D. student in EECS at UC Berkeley (BAIR). I'm fortunate to be supervised by Professor [Yun S. Song](https://people.eecs.berkeley.edu/~yss/).
+
+        I work on computational biology, genomic sequence modeling, and DL-based generative and evolutionary models. I'm interested in building AI systems that help us understand the natural world and improve human lives 🧬🤖
+
+        Feel free to reach out for a coffee chat - I really love coffee ☕️
       # Show a call-to-action button under your biography? (optional)
       button:
         text: Download CV (a.s. Deprecated)
