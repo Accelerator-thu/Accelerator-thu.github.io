@@ -20,10 +20,13 @@ sections:
         I work on computational biology, genomic sequence modeling, and DL-based generative and evolutionary models. I'm interested in building AI systems that help us understand the natural world and improve human lives 🧬🤖
 
         Feel free to reach out for a coffee chat - I really love coffee ☕️
+
+        If you’d like to support my work, you can [buy me a coffee](https://buymeacoffee.com/yufan) 🥺🥺🥺
       # Show a call-to-action button under your biography? (optional)
-      buttons:
+      button:
         - text: Buy me a coffee 🥺+☕️->🥰
           url: https://www.buymeacoffee.com/yufan
+      button:
         - text: Download CV (a.s. Deprecated)
           url: uploads/resume.pdf
       headings:
