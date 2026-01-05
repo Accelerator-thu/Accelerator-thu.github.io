@@ -4,7 +4,7 @@ hugoblox:
     name: Yufan Cao
     type: person
     tagline: Ph.D. Student in EECS | UC Berkeley | BAIR
-    description: PhD student in EECS at UC Berkeley (BAIR) researching computational biology, bio language models, and machine learning methods for biological sequence modeling
+    description: Ph.D. student in EECS at UC Berkeley (BAIR) researching computational biology, bio language models, and machine learning methods for biological sequence modeling
   theme:
     mode: system
     pack: minimal
