@@ -3,19 +3,19 @@ title: 'Towards Automated Model Design on Recommender Systems'
 
 # Authors
 authors:
-  - Tunhou Zhang
-  - Dehua Cheng
-  - Yuchen He
-  - Zhengxing Chen
-  - Xiaoliang Dai
-  - Liang Xiong
-  - Yudong Liu
-  - Feng Cheng
-  - Yufan Cao
-  - Feng Yan
-  - Hai Li
-  - Yiran Chen
-  - Wei Wen
+  - Zhang Tunhou
+  - Cheng Dehua
+  - He Yuchen
+  - Chen Zhengxing
+  - Dai Xiaoliang
+  - Xiong Liang
+  - Liu Yudong
+  - Cheng Feng
+  - Cao Yufan
+  - Yan Feng
+  - Li Hai
+  - Chen Yiran
+  - Wen Wei
 
 date: '2025-01-01T00:00:00Z'
 

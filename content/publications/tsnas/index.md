@@ -3,12 +3,12 @@ title: 'Farthest Greedy Path Sampling for Two-shot Recommender Search'
 
 # Authors
 authors:
-  - Yufan Cao
-  - Tunhou Zhang
-  - Wei Wen
-  - Feng Yan
-  - Hai Li
-  - Yiran Chen
+  - Cao Yufan
+  - Zhang Tunhou
+  - Wen Wei
+  - Yan Feng
+  - Li Hai
+  - Chen Yiran
 
 date: '2023-10-31T00:00:00Z'
 

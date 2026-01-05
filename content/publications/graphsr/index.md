@@ -3,12 +3,12 @@ title: 'Learning Symbolic Models for Graph-Structured Physical Mechanism'
 
 # Authors
 authors:
-  - Hongzhi Shi
-  - Jingtao Ding
-  - Yufan Cao
-  - Quanming Yao
-  - Li Liu
-  - Yong Li
+  - Shi Hongzhi
+  - Ding Jingtao
+  - Cao Yufan
+  - Yao Quanming
+  - Liu Li
+  - Li Yong
 
 date: '2022-04-25T00:00:00Z'
 
