@@ -1,0 +1,4 @@
+{{- if .bio -}}
+  {{ .bio | markdownify | safeHTML }}
+{{- end -}}
+
