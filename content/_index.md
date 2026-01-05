@@ -44,14 +44,12 @@ sections:
         shape: circle # Options: circle (default), square, rounded
   - block: markdown
     content:
-      title: '📚 My Research'
+      title: '🔬 My Research'
       subtitle: ''
-      text: |-
-        Use this area to speak to your mission. I'm a research scientist in the Moonshot team at DeepMind. I blog about machine learning, deep learning, and moonshots.
+      text: |
+        My research explores how machine learning models can capture structure, evolution, and function in biological sequences. I am particularly interested in generative and evolutionary modeling frameworks that connect sequence data with underlying biological mechanisms. This interest grew out of my earlier work on graph neural networks and symbolic modeling, where I studied how expressive models can represent underlying mechanisms in physical systems.
 
-        I apply a range of qualitative and quantitative methods to comprehensively investigate the role of science and technology in the economy.
-
-        Please reach out to collaborate 😃
+        Over time, my focus shifted toward biological data, particularly single-cell and genomic settings, where complexity and noise demand statistically grounded, generative, and evolutionary perspectives. I am now interested in building AI systems that not only model biological sequences, but also help reveal principles that can guide biological understanding and experimentation.
     design:
       columns: '1'
   - block: collection
