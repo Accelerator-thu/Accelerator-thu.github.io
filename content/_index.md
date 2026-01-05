@@ -21,7 +21,7 @@ sections:
 
         Feel free to reach out for a coffee chat - I really love coffee ☕️
 
-        If you’d like to support my work, you can [buy me a coffee](https://buymeacoffee.com/yufan) 🥺🥺🥺 🥺+☕️->🥰
+        If you’d like to support my work, you can 🥺👉you[buy me a coffee](https://buymeacoffee.com/yufan)👈🥺
       # Show a call-to-action button under your biography? (optional)
       button:
         text: Download CV (a.s. Deprecated)
