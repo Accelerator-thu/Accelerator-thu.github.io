@@ -61,9 +61,7 @@ experience:
     org: "Department of Electronic Engineering, Tsinghua University"
     start: "2021"
     end: "2022"
-    summary: "Research Assistant at Tsinghua EE, focusing on symbolic regression in AI for Physics.
-
-      \n"
+    summary: "Research Assistant at Tsinghua EE, focusing on symbolic regression in AI for Physics."
 skills:
   - name: "Technical Skills"
     items:
