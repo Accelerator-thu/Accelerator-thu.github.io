@@ -21,9 +21,11 @@ sections:
 
         Feel free to reach out for a coffee chat - I really love coffee ☕️
       # Show a call-to-action button under your biography? (optional)
-      button:
-        text: Download CV (a.s. Deprecated)
-        url: uploads/resume.pdf
+      buttons:
+        - text: Buy me a coffee 🥺+☕️->🥰
+          url: https://www.buymeacoffee.com/yufan
+        - text: Download CV (a.s. Deprecated)
+          url: uploads/resume.pdf
       headings:
         about: 'About Me'
         education: ''
