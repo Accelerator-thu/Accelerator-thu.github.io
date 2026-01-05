@@ -86,7 +86,19 @@ languages:
   - name: "Mandarin Chinese"
     level: 5
     label: "Native"
-awards: []
+awards:
+  - title: "Outstanding Graduate, Tsinghua University"
+    date: "2024"
+  - title: "Outstanding Graduate, Beijing Municipality"
+    date: "2024"
+  - title: "Scholarship for Comprehensive Excellence"
+    date: "2023"
+  - title: "Member of the Sixteenth Spark Program"
+    date: "2022"
+  - title: "Scholarship for Comprehensive Excellence"
+    date: "2022"
+  - title: "First Prize, National Undergraduate Physics Competition"
+    date: "2021"
 weight: null
 ids:
   orcid: "0009-0006-7747-5815"
