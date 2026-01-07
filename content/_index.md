@@ -15,7 +15,7 @@ sections:
       # Choose a user profile to display (a folder name within `content/authors/`)
       username: me
       text: |
-        Hi! I'm Yufan Cao and I'm a second-year Ph.D. student in EECS at [BAIR](https://bair.berkeley.edu/). I'm fortunate to be supervised by Professor [Yun S. Song](https://people.eecs.berkeley.edu/~yss/).
+        Hi! I'm Yufan Cao and I'm a second-year Ph.D. student in EECS at [BAIR](https://bair.berkeley.edu/). I'm fortunate to be supervised by Professor [Yun S. Song](https://people.eecs.berkeley.edu/~yss/). I'm also actively collaborating with the [Lawrence Berkeley National Laboratory](https://www.lbl.gov/) and the [Innovative Genomics Institute](https://innovativegenomics.org/).
 
         I work on computational biology, genomic sequence modeling, and DL-based generative and evolutionary models. I'm interested in building AI systems that help us understand the natural world and improve human lives 🧬🤖
 
