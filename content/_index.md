@@ -133,15 +133,11 @@ sections:
   #       # Card background color (CSS class)
   #       css_class: 'bg-primary-300 dark:bg-primary-700'
   #       css_style: ''
-  - block: markdown
-    content:
-      title: 'Visitor Map'
-      text: |
-        <script type="text/javascript" id="clstr_globe"
-          src="//clustrmaps.com/globe.js?d=4Xep7sTDrcGeXzkeLEceUWdJuTP_2F9IgpA-QxMkKNg">
-        </script>
-    design:
-      columns: '1'
-    advanced:
-      unsafe: true
+footer:
+  text: |
+    <div style="text-align:center; margin-top:1rem;">
+      <a href="https://clustrmaps.com/site/1c8xh" title="ClustrMaps">
+        <img src="//www.clustrmaps.com/map_v2.png?d=4Xep7sTDrcGeXzkeLEceUWdJuTP_2F9IgpA-QxMkKNg&cl=ffffff" />
+      </a>
+    </div>
 ---
