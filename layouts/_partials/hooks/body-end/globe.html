@@ -1,9 +1,23 @@
 <style>
+    #clustrmaps-globe-container {
+        width: 300px !important;
+        max-width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
     #clstr_globe,
-    #clustrmaps-globe {
-        transform: scale(0.2);
+    #clustrmaps-globe,
+    #clustrmaps-globe iframe,
+    #clustrmaps-globe canvas {
+        width: 300px !important;
+        max-width: 100% !important;
+        height: auto !important;
+        transform: scale(0.5);
         transform-origin: center;
     }
 </style>
-<script type="text/javascript" id="clstr_globe"
-    src="//clustrmaps.com/globe.js?d=4Xep7sTDrcGeXzkeLEceUWdJuTP_2F9IgpA-QxMkKNg"></script>
+<div id="clustrmaps-globe-container">
+    <script type="text/javascript" id="clstr_globe"
+        src="//clustrmaps.com/globe.js?d=4Xep7sTDrcGeXzkeLEceUWdJuTP_2F9IgpA-QxMkKNg"></script>
+</div>
