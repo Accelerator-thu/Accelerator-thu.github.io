@@ -137,5 +137,11 @@ sections:
     content:
       title: 'Visitor Map'
       text: |
-      <script async type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=4Xep7sTDrcGeXzkeLEceUWdJuTP_2F9IgpA-QxMkKNg"></script>
+        <script type="text/javascript" id="clstr_globe"
+          src="//clustrmaps.com/globe.js?d=4Xep7sTDrcGeXzkeLEceUWdJuTP_2F9IgpA-QxMkKNg">
+        </script>
+    design:
+      columns: '1'
+    advanced:
+      unsafe: true
 ---
