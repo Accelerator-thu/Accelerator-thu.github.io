@@ -133,4 +133,7 @@ sections:
   #       # Card background color (CSS class)
   #       css_class: 'bg-primary-300 dark:bg-primary-700'
   #       css_style: ''
+footer:
+  text: |
+    <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=4Xep7sTDrcGeXzkeLEceUWdJuTP_2F9IgpA-QxMkKNg"></script>
 ---
