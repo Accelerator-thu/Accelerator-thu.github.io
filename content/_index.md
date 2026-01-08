@@ -139,7 +139,7 @@ sections:
       text: |
         <div style="text-align:center;">
           <a href="https://clustrmaps.com/site/1c8xh" title="ClustrMaps">
-            <img src="//www.clustrmaps.com/map_v2.png?d=4Xep7sTDrcGeXzkeLEceUWdJuTP_2F9IgpA-QxMkKNg&cl=ffffff" />
+            <img src="//www.clustrmaps.com/map_v2.png?d=4Xep7sTDrcGeXzkeLEceUWdJuTP_2F9IgpA-QxMkKNg&cl=ffffff" style="width: 120%; max-width: 800px; height: auto;" />
           </a>
         </div>
     design:
