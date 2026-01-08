@@ -133,11 +133,17 @@ sections:
   #       # Card background color (CSS class)
   #       css_class: 'bg-primary-300 dark:bg-primary-700'
   #       css_style: ''
-footer:
-  text: |
-    <div style="text-align:center; margin-top:1rem;">
-      <a href="https://clustrmaps.com/site/1c8xh" title="ClustrMaps">
-        <img src="//www.clustrmaps.com/map_v2.png?d=4Xep7sTDrcGeXzkeLEceUWdJuTP_2F9IgpA-QxMkKNg&cl=ffffff" />
-      </a>
-    </div>
+  - block: markdown
+    content:
+      title: '🌍 Visitors'
+      text: |
+        <div style="text-align:center;">
+          <a href="https://clustrmaps.com/site/1c8xh" title="ClustrMaps">
+            <img src="//www.clustrmaps.com/map_v2.png?d=4Xep7sTDrcGeXzkeLEceUWdJuTP_2F9IgpA-QxMkKNg&cl=ffffff" />
+          </a>
+        </div>
+    design:
+      columns: '1'
+    advanced:
+      unsafe: true
 ---
