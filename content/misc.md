@@ -12,7 +12,7 @@ sections:
       title: 'Toy projects'
       subtitle: 'Small demos and side projects'
       text: |
-        - **[3D Chess](https://accelerator-thu.github.io/3d-chess/)** — Play 3D chess in the browser.
+        - **[3D Chess](https://accelerator-thu.github.io/3d-chess/)** - Call a friend to play 3D chess in the browser together! (Game AI coming soon. 🤖)
     design:
       columns: '1'
 ---
