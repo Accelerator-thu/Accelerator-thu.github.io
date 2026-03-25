@@ -36,6 +36,8 @@ tags:
   - Deep Learning
 
 featured: true
+layout: redirect
+redirect_url: "https://arxiv.org/abs/2310.20705"
 
 # Standard identifiers for auto-linking
 hugoblox:

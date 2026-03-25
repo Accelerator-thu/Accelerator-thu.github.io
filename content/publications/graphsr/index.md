@@ -36,6 +36,8 @@ tags:
 
 # Display this page in the Featured widget?
 featured: true
+layout: redirect
+redirect_url: "/publications/graphsr/1071_learning_symbolic_models_for_g.pdf"
 
 # Standard identifiers for auto-linking
 hugoblox:
