@@ -13,14 +13,14 @@ sections:
       subtitle: 'Small demos and side projects'
       text: |
         - **[3D Chess](https://accelerator-thu.github.io/3d-chess/)** - Call a friend to play 3D chess in the browser together! (Game AI available 🤖)
+    design:
+      columns: '1'
   - block: markdown
     content:
       title: 'Gallery'
       subtitle: ''
       text: |
         - **[Photos](https://yiihann.github.io/photos/)** - A collection of beautiful photos by my girlfriend 📷
-    design:
-      columns: '1'
     design:
       columns: '1'
 ---
