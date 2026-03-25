@@ -57,7 +57,7 @@ education:
     institution: "Tsinghua University"
     start: "2020-09-01"
     end: "2024-07-01"
-    summary: "B.Eng. in [EE](https://www.ee.tsinghua.edu.cn/) at [Tsinghua](https://www.tsinghua.edu.cn/). Strong foundation in mathematics, physics, signal processing, electrical engineering and machine learning."
+    summary: "B.Eng. in [EE](https://www.ee.tsinghua.edu.cn/) at [Tsinghua](https://www.tsinghua.edu.cn/). Strong foundation in mathematics, physics, signal processing, electrical engineering, machine learning, deep learning, and biology."
 experience:
   - role: "Research Assistant"
     org: "School of Computer Science, Carnegie Mellon University"
