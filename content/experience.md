@@ -22,10 +22,19 @@ sections:
   #   content:
   #     title: Skills & Hobbies
   #     username: me
-  - block: resume-awards
+  - block: markdown
     content:
       title: Awards & Honors
-      username: me
+      text: |
+        - Outstanding Graduate, Tsinghua University (2024)
+        - Outstanding Graduate, Beijing City (2024)
+        - Scholarship for Comprehensive Excellence, Tsinghua University (2023)
+        - Member of the Sixteenth Spark Program, Tsinghua University (2022)
+        - Scholarship for Comprehensive Excellence, Tsinghua University (2022)
+        - Scholarship for Excellent Academic Performances, Tsinghua University (2021, 4/240 students)
+        - First Prize, National Undergraduate Physics Competition (2021)
+    design:
+      columns: '1'
   - block: resume-languages
     content:
       title: Languages
