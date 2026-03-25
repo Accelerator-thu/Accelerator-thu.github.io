@@ -20,7 +20,7 @@ sections:
       title: 'Gallery'
       subtitle: ''
       text: |
-        - **[Photos](https://yiihann.github.io/photos/)** — Moments captured by my girlfriend and our friends: us and the places we've been 📷
+        - **[Photos](https://yiihann.github.io/photos/)** — Moments captured by my girlfriend [Yihan](https://yiihann.github.io/) and our friends: us and the places we've been 📷
     design:
       columns: '1'
 ---
