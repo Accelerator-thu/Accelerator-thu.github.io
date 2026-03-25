@@ -12,13 +12,19 @@ status:
   icon: "🧬"
 role: "Ph.D. Student in EECS@UCB"
 bio: |
-  Hi! I'm Yufan Cao and I'm a second-year Ph.D. student in EECS at UC Berkeley (BAIR). I'm fortunate to be supervised by Professor [Yun S. Song](https://people.eecs.berkeley.edu/~yss/). 
-  
-  I work on computational biology, genomic sequence modeling, and DL-based generative and evolutionary models. I'm interested in building AI systems that help us understand the natural world and improve human lives 🧬🤖
-  
+  Hi! I'm Yufan Cao, a second-year Ph.D. student in EECS at UC Berkeley (BAIR), supervised by Professor [Yun S. Song](https://people.eecs.berkeley.edu/~yss/).
+
+  I work on biological language models and evolutionary genomics — building generative models that capture how sequences evolve and function. I'm interested in AI systems that help us understand the natural world and improve human lives 🧬🤖
+
   Feel free to reach out for a coffee chat - I really love coffee ☕️
 
-affiliations: []
+affiliations:
+  - name: "Berkeley AI Research (BAIR)"
+    url: "https://bair.berkeley.edu/"
+  - name: "Song Lab"
+    url: "https://people.eecs.berkeley.edu/~yss/"
+  - name: "Innovative Genomics Institute"
+    url: "https://innovativegenomics.org/"
 links:
   - icon: "hero/at-symbol"
     url: "mailto:yufan.cao@berkeley.edu"
@@ -37,10 +43,10 @@ links:
     url: "https://www.instagram.com/yufancao66"
     label: "Instagram"
 interests:
-  - "AI for Science"
-  - "Evolution"
-  - "Genomics"
-  - "Deep Learning"
+  - "Biological Language Models"
+  - "Evolutionary Genomics"
+  - "Generative Sequence Modeling"
+  - "Computational Biology"
 education:
   - degree: "Ph.D. in EECS"
     institution: "UC Berkeley"
