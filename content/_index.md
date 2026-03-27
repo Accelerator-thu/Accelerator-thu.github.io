@@ -55,9 +55,15 @@ sections:
       text: ''
     design:
       columns: '1'
+  - block: markdown
+    content:
+      title: ''
+      text: '### AI for Physics'
+    design:
+      columns: '1'
   - block: collection
     content:
-      title: 'AI for Physics'
+      title: ''
       filters:
         folders:
           - publications
@@ -65,9 +71,15 @@ sections:
         tag: 'AI for Physics'
     design:
       view: citation
+  - block: markdown
+    content:
+      title: ''
+      text: '### AutoML for Recommender Systems'
+    design:
+      columns: '1'
   - block: collection
     content:
-      title: 'AutoML for Recommender Systems'
+      title: ''
       filters:
         folders:
           - publications
