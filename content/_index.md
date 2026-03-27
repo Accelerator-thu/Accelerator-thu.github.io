@@ -63,7 +63,7 @@ sections:
     design:
       view: citation
       spacing:
-        padding: ['2rem', '0', '1rem', '0']
+        padding: ['0.5rem', '0', '0.5rem', '0']
   - block: collection
     content:
       title: '​'
@@ -78,7 +78,7 @@ sections:
     design:
       view: citation
       spacing:
-        padding: ['1rem', '0', '3rem', '0']
+        padding: ['0.5rem', '0', '0.5rem', '0']
   # - block: collection
   #   content:
   #     title: Recent Publications
