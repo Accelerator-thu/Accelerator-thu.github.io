@@ -48,11 +48,16 @@ sections:
         Over time, my focus shifted toward biological data, particularly single-cell and genomic settings, where complexity and noise demand statistically grounded, generative, and evolutionary perspectives. I am now interested in building AI systems that not only model biological sequences, but also help reveal principles that can guide biological understanding and experimentation.
     design:
       columns: '1'
-  - block: collection
+  - block: markdown
     id: papers
     content:
       title: Publications
-      subtitle: '**AI for Physics**'
+      text: ''
+    design:
+      columns: '1'
+  - block: collection
+    content:
+      title: 'AI for Physics'
       filters:
         folders:
           - publications
@@ -62,8 +67,7 @@ sections:
       view: citation
   - block: collection
     content:
-      title: ''
-      subtitle: '**AutoML for Recommender Systems**'
+      title: 'AutoML for Recommender Systems'
       filters:
         folders:
           - publications
