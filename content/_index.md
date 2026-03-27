@@ -64,7 +64,7 @@ sections:
       view: citation
   - block: collection
     content:
-      title: ''
+      title: '​'
       text: '<p style="font-size:1.1rem;font-weight:600;margin-bottom:0.5rem;">AutoML for Recommender Systems</p>'
       filters:
         folders:
