@@ -62,6 +62,8 @@ sections:
       unsafe: true
     design:
       view: citation
+      spacing:
+        padding: ['2rem', '0', '1rem', '0']
   - block: collection
     content:
       title: '​'
@@ -75,6 +77,8 @@ sections:
       unsafe: true
     design:
       view: citation
+      spacing:
+        padding: ['1rem', '0', '3rem', '0']
   # - block: collection
   #   content:
   #     title: Recent Publications
