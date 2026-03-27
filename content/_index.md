@@ -58,7 +58,9 @@ sections:
   - block: markdown
     content:
       title: ''
-      text: '### AI for Physics'
+      text: '<h3 class="text-xl font-semibold">AI for Physics</h3>'
+    advanced:
+      unsafe: true
     design:
       columns: '1'
   - block: collection
@@ -74,7 +76,9 @@ sections:
   - block: markdown
     content:
       title: ''
-      text: '### AutoML for Recommender Systems'
+      text: '<h3 class="text-xl font-semibold">AutoML for Recommender Systems</h3>'
+    advanced:
+      unsafe: true
     design:
       columns: '1'
   - block: collection
