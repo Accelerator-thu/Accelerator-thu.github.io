@@ -40,6 +40,7 @@ tags:
   - Neural Architecture Search
   - Automated Machine Learning
   - Deep Learning
+  - AutoML for RecSys
 
 # Display this page in the Featured widget?
 featured: true

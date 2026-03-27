@@ -34,6 +34,7 @@ tags:
   - Weight Sharing
   - Path Sampling
   - Deep Learning
+  - AutoML for RecSys
 
 featured: true
 layout: redirect

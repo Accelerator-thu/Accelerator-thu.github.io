@@ -52,10 +52,23 @@ sections:
     id: papers
     content:
       title: Publications
+      subtitle: '**AI for Physics**'
       filters:
         folders:
           - publications
         featured_only: true
+        tag: 'AI for Physics'
+    design:
+      view: citation
+  - block: collection
+    content:
+      title: ''
+      subtitle: '**AutoML for Recommender Systems**'
+      filters:
+        folders:
+          - publications
+        featured_only: true
+        tag: 'AutoML for RecSys'
     design:
       view: citation
   # - block: collection

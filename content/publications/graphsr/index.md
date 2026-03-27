@@ -33,6 +33,7 @@ tags:
   - Graph Neural Networks
   - Physics-Informed Learning
   - Machine Learning
+  - AI for Physics
 
 # Display this page in the Featured widget?
 featured: true
