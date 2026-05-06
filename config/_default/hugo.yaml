@@ -23,6 +23,7 @@ removePathAccents: true
 
 build:
   writeStats: true
+buildDrafts: false
 enableGitInfo: false
 summaryLength: 30
 pagination:

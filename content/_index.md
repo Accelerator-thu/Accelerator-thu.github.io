@@ -79,6 +79,23 @@ sections:
       view: citation
       spacing:
         padding: ['0.5rem', '0', '0.5rem', '0']
+  - block: collection
+    id: blog
+    content:
+      title: Blog
+      text: ''
+      count: 3
+      filters:
+        folders:
+          - blog
+        exclude_featured: false
+        exclude_future: false
+      offset: 0
+      order: desc
+    design:
+      view: article-grid
+      spacing:
+        padding: ['1rem', '0', '1rem', '0']
   # - block: collection
   #   content:
   #     title: Recent Publications
