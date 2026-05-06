@@ -3,4 +3,14 @@
   .li-cite-author span {
     text-transform: capitalize;
   }
+
+  /* Widen blog post text columns beyond Tailwind Typography's narrow default. */
+  article main > .prose[data-pagefind-body] {
+    max-width: 82ch;
+  }
+
+  article main > .prose[data-pagefind-body] .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
 </style>
