@@ -3,6 +3,7 @@ title: "Superintelligence is a Society, Not a Mind"
 subtitle: "What human civilization teaches us about the architecture of AI"
 summary: "The path to superintelligence runs through specialization and coordination, not scaling a single model — and human civilization already shows us how."
 date: 2026-03-27
+draft: true
 
 authors:
   - me
