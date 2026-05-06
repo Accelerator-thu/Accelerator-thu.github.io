@@ -176,7 +176,7 @@ A line segment of length $l$ can be viewed as a degenerate convex polygon. Its b
 ### Rectangle
 For a rectangle of dimensions $a \times b$, assuming $\sqrt{a^2 + b^2} \le d$, the perimeter is $P = 2(a+b)$. The crossing probability is $\frac{2(a+b)}{\pi d}$.
 
-### Regular $n$-gon to a Circle
+### Circle
 As $n \to \infty$, a regular $n$-gon approaches a circle of radius $r$, with perimeter $P = 2\pi r$. The formula gives $P(\text{crossing}) = \frac{2\pi r}{\pi d} = \frac{2r}{d}$. Since $2r$ is the constant width (diameter) of the circle, it crosses a line whenever its center falls within $r$ of a line. Given the line spacing $d$, this exactly matches the probability $\frac{2r}{d}$.
 
 ## Subtleties and Assumptions
