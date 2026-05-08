@@ -1,5 +1,5 @@
 ---
-title: Blog
+title: Blogs
 date: 2026-05-06
 type: landing
 
@@ -9,7 +9,7 @@ design:
 sections:
   - block: collection
     content:
-      title: Blog
+      title: Blogs
       text: ''
       filters:
         folders:

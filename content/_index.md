@@ -82,7 +82,7 @@ sections:
   - block: collection
     id: blog
     content:
-      title: Blog
+      title: Blogs
       text: ''
       count: 3
       filters:
