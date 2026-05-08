@@ -19,11 +19,11 @@ main:
   - name: Experience
     url: experience/
     weight: 20
+  - name: Blogs
+    url: blog/
+    weight: 25
   - name: Misc
     url: misc/
-    weight: 25
-  - name: Blog
-    url: blog/
     weight: 30
   # - name: Projects
   #   url: projects/
