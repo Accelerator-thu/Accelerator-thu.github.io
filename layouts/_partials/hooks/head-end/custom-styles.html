@@ -9,8 +9,76 @@
     max-width: 82ch;
   }
 
+  /* ── Blog post typography ───────────────────────────────────────────── */
+
+  /* h2: serif editorial weight with teal underline accent */
+  article main > .prose[data-pagefind-body] h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.65rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #1a2332;
+    margin-top: 3rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 2px solid #6FA3A8;
+  }
+
+  .dark article main > .prose[data-pagefind-body] h2 {
+    color: #e8ecf0;
+    border-bottom-color: #4a8a8f;
+  }
+
+  /* h3: small uppercase label style */
+  article main > .prose[data-pagefind-body] h3 {
+    font-size: 0.8rem;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6FA3A8;
+    margin-top: 2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .dark article main > .prose[data-pagefind-body] h3 {
+    color: #7bb8bd;
+  }
+
+  /* Horizontal rules: spacious thin separator */
+  article main > .prose[data-pagefind-body] hr {
+    margin: 2.5rem 0;
+    border: none;
+    border-top: 1.5px solid #dde3e5;
+  }
+
+  .dark article main > .prose[data-pagefind-body] hr {
+    border-top-color: #2e3a42;
+  }
+
+  /* Display math: subtle background with left accent bar */
   article main > .prose[data-pagefind-body] .katex-display {
     overflow-x: auto;
     overflow-y: hidden;
+    padding: 0.875rem 1.5rem;
+    background: #f5f9f8;
+    border-left: 3px solid #6FA3A8;
+    border-radius: 0 6px 6px 0;
+    margin: 1.25rem 0;
+  }
+
+  .dark article main > .prose[data-pagefind-body] .katex-display {
+    background: #1a2630;
+    border-left-color: #4a8a8f;
+  }
+
+  /* Lead paragraph immediately after an h2 */
+  article main > .prose[data-pagefind-body] h2 + p {
+    font-size: 1.04em;
+    color: #2f3a41;
+    line-height: 1.75;
+  }
+
+  .dark article main > .prose[data-pagefind-body] h2 + p {
+    color: #bac5cc;
   }
 </style>
