@@ -1,0 +1,9 @@
+# Optional caption overrides for content/driven/ images.
+# By default, captions are generated from filenames after removing:
+# - file extensions, e.g. .jpg or .png
+# - leading order prefixes, e.g. "01. " or "02-"
+#
+# Put photos in content/driven/ next to _index.md.
+
+photos:
+  # "01-uhaul.jpg": "U-Haul"

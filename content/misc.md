@@ -15,6 +15,14 @@ sections:
         - **[3D Chess](https://accelerator-thu.github.io/3d-chess/)** — Call a friend to play 3D chess in the browser together or play against Game AI 🤖
     design:
       columns: '1'
+  # - block: markdown
+  #   content:
+  #     title: "Things I've Driven"
+  #     subtitle: ''
+  #     text: |
+  #       - **[Open gallery](/driven/)** — Cars, carts, robots, and one very persuasive U-Haul.
+  #   design:
+  #     columns: '1'
   - block: markdown
     content:
       title: 'Gallery'
