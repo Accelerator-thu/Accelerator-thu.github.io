@@ -1,7 +1,7 @@
 {{ $allImages := .Page.Resources.ByType "image" }}
 {{ $captionKey := .Get "captions" | default "photos" }}
 {{ $manualCaptions := dict }}
-{{ with index hugo.Data $captionKey }}
+{{ with index site.Data $captionKey }}
   {{ with .photos }}
     {{ $manualCaptions = . }}
   {{ end }}

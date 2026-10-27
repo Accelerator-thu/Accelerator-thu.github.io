@@ -1,0 +1,56 @@
+{{- /*
+  Render publications grouped by tag as compact cards.
+  Usage: {{< publications tag="AI for Physics" title="AI for Physics" >}}
+  Author names matching data/authors/me.yaml (or "me") are emphasized.
+*/ -}}
+{{- $tag := .Get "tag" -}}
+{{- $title := .Get "title" | default $tag -}}
+{{- $me := site.Data.authors.me.name.display | default "" -}}
+{{- $pubs := where (where site.RegularPages "Section" "publications") "Params.featured" true -}}
+{{- $pubs = where $pubs "Params.tags" "intersect" (slice $tag) -}}
+{{- with $pubs }}
+<section class="pub-group not-prose">
+  {{- with $title }}<h3 class="pub-group-title">{{ . }}</h3>{{ end }}
+  {{- range .ByDate.Reverse }}
+  {{- $item := . -}}
+  {{- $year := $item.Date.Format "2006" -}}
+  {{- $venue := $item.Params.publication_short | default $item.Params.publication -}}
+  {{- $type := index ($item.Params.publication_types | default (slice "")) 0 -}}
+  <article class="pub-card">
+    {{- /* Prefer a theme-aware inline thumb.svg; fall back to featured.* raster. */ -}}
+    {{- with $item.Resources.GetMatch "thumb.svg" }}
+    <a class="pub-thumb" href="{{ $item.RelPermalink }}" aria-hidden="true" tabindex="-1">{{ .Content | safeHTML }}</a>
+    {{- else }}{{ with $item.Resources.GetMatch "featured*" }}
+    {{- $thumb := .Fill "240x240 Center webp" }}
+    <a class="pub-thumb" href="{{ $item.RelPermalink }}" aria-hidden="true" tabindex="-1">
+      <img src="{{ $thumb.RelPermalink }}" width="120" height="120" alt="" loading="lazy">
+    </a>
+    {{- end }}{{ end }}
+    <div class="pub-body">
+      <a class="pub-title" href="{{ $item.RelPermalink }}">{{ $item.Title }}</a>
+      <div class="pub-authors">
+        {{- /* Long author lists: show through the site owner (min. 6), then "et al." */ -}}
+        {{- $authors := $item.Params.authors -}}
+        {{- $limit := len $authors -}}
+        {{- if gt (len $authors) 10 -}}
+          {{- $limit = 6 -}}
+          {{- range $i, $a := $authors }}{{ if and (or (eq $a $me) (eq $a "me")) (ge $i $limit) }}{{ $limit = add $i 1 }}{{ end }}{{ end -}}
+        {{- end -}}
+        {{- range $i, $a := first $limit $authors -}}
+          {{- if $i }}, {{ end -}}
+          {{- if or (eq $a $me) (eq $a "me") -}}<span class="pub-me">{{ $me }}</span>{{- else -}}{{ $a }}{{- end -}}
+          {{- with index ($item.Params.author_notes | default slice) $i }}<sup class="pub-note" title="{{ . }}">*</sup>{{ end -}}
+        {{- end -}}
+        {{- if lt $limit (len $authors) }}, <span title="{{ delimit $authors ", " }}">et al.</span>{{ end -}}
+      </div>
+      {{- with $item.Params.author_notes }}{{ with index . 0 }}<div class="pub-footnote">* {{ . }}</div>{{ end }}{{ end }}
+      <div class="pub-meta">
+        <span class="pub-venue">{{ if $venue }}{{ $venue | markdownify | plainify | replaceRE `^In\s+` "" }}{{ else if eq $type "article" }}Preprint{{ else }}Manuscript{{ end }}</span>
+        <span class="pub-year">{{ $year }}</span>
+        <span class="pub-links">{{ partial "page_links" (dict "page" $item "is_list" 1) }}</span>
+      </div>
+    </div>
+  </article>
+  {{- end }}
+</section>
+{{- end }}

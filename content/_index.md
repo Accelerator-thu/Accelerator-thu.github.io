@@ -15,7 +15,7 @@ sections:
       # Choose a user profile to display (a folder name within `content/authors/`)
       username: me
       text: |
-        Hi! I’m Yufan Cao, a second-year Ph.D. student in [EECS](https://eecs.berkeley.edu/) at [BAIR](https://bair.berkeley.edu/), supervised by Professor [Yun S. Song](https://people.eecs.berkeley.edu/~yss/). I’m also actively collaborating with the [Lawrence Berkeley National Laboratory](https://www.lbl.gov/) and the [Innovative Genomics Institute](https://innovativegenomics.org/).
+        Hi! I’m Yufan Cao, a third-year Ph.D. student in [EECS](https://eecs.berkeley.edu/) at [BAIR](https://bair.berkeley.edu/), supervised by Professor [Yun S. Song](https://people.eecs.berkeley.edu/~yss/). I’m also actively collaborating with the [Lawrence Berkeley National Laboratory](https://www.lbl.gov/) and the [Innovative Genomics Institute](https://innovativegenomics.org/).
 
         Feel free to reach out for a coffee chat - I really love coffee ☕️
 
@@ -48,37 +48,20 @@ sections:
         Over time, my focus shifted toward biological data, particularly single-cell and genomic settings, where complexity and noise demand statistically grounded, generative, and evolutionary perspectives. I am now interested in building AI systems that not only model biological sequences, but also help reveal principles that can guide biological understanding and experimentation.
     design:
       columns: '1'
-  - block: collection
+  - block: markdown
     id: papers
     content:
-      title: Publications
-      text: '<p style="font-size:1.1rem;font-weight:600;margin-bottom:0.5rem;">AI for Physics</p>'
-      filters:
-        folders:
-          - publications
-        featured_only: true
-        tag: 'AI for Physics'
-    advanced:
-      unsafe: true
+      title: '📄 Publications'
+      subtitle: ''
+      text: |
+        {{< publications tag="Evolution & Sequence Modeling" title="Evolution & Biological Sequence Modeling" >}}
+        {{< publications tag="AI Agents" title="AI Agents" >}}
+        {{< publications tag="AI for Physics" title="AI for Physics" >}}
+        {{< publications tag="AutoML for RecSys" title="AutoML for Recommender Systems" >}}
     design:
-      view: citation
+      columns: '1'
       spacing:
-        padding: ['0.5rem', '0', '0.5rem', '0']
-  - block: collection
-    content:
-      title: '​'
-      text: '<p style="font-size:1.1rem;font-weight:600;margin-bottom:0.5rem;">AutoML for Recommender Systems</p>'
-      filters:
-        folders:
-          - publications
-        featured_only: true
-        tag: 'AutoML for RecSys'
-    advanced:
-      unsafe: true
-    design:
-      view: citation
-      spacing:
-        padding: ['0.5rem', '0', '0.5rem', '0']
+        padding: ['1rem', '0', '2rem', '0']
   - block: collection
     id: blog
     content:

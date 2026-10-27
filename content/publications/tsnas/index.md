@@ -47,9 +47,6 @@ hugoblox:
 
 # Custom links
 links:
-  - type: preprint
-    provider: arxiv
-    id: 2310.20705v1
   - type: pdf
     url: "2310.20705v1.pdf"
   # - type: code

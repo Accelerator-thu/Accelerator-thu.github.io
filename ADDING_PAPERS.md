@@ -136,3 +136,18 @@ Add any additional content, notes, or supplementary material here using Markdown
 - **Publications page**: All papers appear at `/publications/`
 - **Individual pages**: Each paper has its own page at `/publications/your-paper-name/`
 
+
+## Homepage Grouping
+
+The homepage `Publications` section renders featured papers in themed groups via the
+`publications` shortcode (`layouts/shortcodes/publications.html`), called from
+`content/_index.md`:
+
+```
+{{< publications tag="AI for Physics" title="AI for Physics" >}}
+```
+
+A paper appears in a group when `featured: true` and its `tags` include the group's `tag`
+(current groups: `Evolution & Sequence Modeling`, `AI Agents`, `AI for Physics`,
+`AutoML for RecSys`). Your own name is bolded automatically, and author lists longer than
+10 are truncated with "et al." after your name. Add a square `featured.png` for the thumbnail.
