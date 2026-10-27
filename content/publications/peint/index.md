@@ -5,6 +5,7 @@ title: 'Deep Models of Protein Evolution in Time Generate Realistic Evolutionary
 authors:
   - Antoine Koehl
   - Sebastian Prillo
+  - Yufan Cao
   - Matthew Liu
   - Junhao Xiong
   - Lillian Weng

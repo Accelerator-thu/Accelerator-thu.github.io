@@ -82,7 +82,9 @@
     color: #bac5cc;
   }
   /* ── Homepage publication cards (see layouts/shortcodes/publications.html) ── */
-  #papers .prose { max-width: 56rem; }
+  /* Widen the homepage text columns beyond the theme's 65ch max-w-prose wrapper. */
+  #papers > div.max-w-prose, #papers .prose { max-width: 72rem; }
+  #research > div.max-w-prose, #research .prose { max-width: 60rem; }
 
   .pub-group { margin: 0 auto 1.75rem; text-align: left; }
 
@@ -158,7 +160,7 @@
     color: #56636b;
   }
   .dark .pub-authors { color: #a5b1b9; }
-  .pub-me { font-weight: 700; color: #1a2332; text-decoration: underline; text-decoration-color: #6FA3A8; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .pub-me { white-space: nowrap; font-weight: 700; color: #1a2332; text-decoration: underline; text-decoration-color: #6FA3A8; text-decoration-thickness: 2px; text-underline-offset: 3px; }
   .dark .pub-me { color: #eef2f5; }
 
   .pub-note { font-size: 0.7em; margin-left: 1px; }
