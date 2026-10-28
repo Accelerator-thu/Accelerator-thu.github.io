@@ -78,6 +78,7 @@ sections:
       order: desc
     design:
       view: article-grid
+      columns: 3
       spacing:
         padding: ['1rem', '0', '1rem', '0']
   # - block: collection

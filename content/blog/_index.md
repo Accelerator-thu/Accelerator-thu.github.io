@@ -20,4 +20,5 @@ sections:
       order: desc
     design:
       view: article-grid
+      columns: 3
 ---

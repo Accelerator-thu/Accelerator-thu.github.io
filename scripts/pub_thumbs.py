@@ -134,6 +134,41 @@ def tsnas():
         b.append(dot(p[0],p[1],r,'th-warm-f' if i==0 else 'th-acc-f'))
     return svg(''.join(b))
 
+def rect(x,y,w,h,c,rx=3,w_=1.6):
+    return f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" class="{c}" stroke-width="{w_}" fill="none"/>'
+def poly(pts,c,f='',w=2):
+    d=' '.join(f'{x:.1f},{y:.1f}' for x,y in pts); fill='' if f else 'fill="none"'
+    return f'<polygon points="{d}" class="{c} {f}" stroke-width="{w}" stroke-linejoin="round" {fill}/>'
+
+# ---------- Blog / Buffon polygons: ruled floor; a needle and convex polygons
+# dropped at random. Shapes crossing a line are accented (P ~ perimeter).
+def buffon():
+    b=[]
+    for y in (20,50,80,110): b.append(line(6,y,114,y,'th-faint',1.6))
+    def ngon(cx,cy,r,n,rot): return [(cx+r*math.cos(math.radians(rot+360*i/n)),cy+r*math.sin(math.radians(rot+360*i/n))) for i in range(n)]
+    b.append(poly(ngon(34,48,13,3,-80),'th-acc','th-warm-f'))   # triangle crossing y=50
+    b.append(poly(ngon(84,34,10,5,10),'th-ink'))               # pentagon, no crossing
+    b.append(poly(ngon(78,82,14,6,0),'th-acc','th-warm-f'))     # hexagon crossing y=80
+    b.append(line(18,90,40,72,'th-acc',2.6))                    # needle crossing y=80
+    b.append(dot(29,81,2.4,'th-acc-f'))
+    return svg(''.join(b))
+
+# ---------- Blog / NotEvolve: a notebook as the agent's state: code cells,
+# an output cell, live kernel variables; the agent loops back to revise it.
+def notevolve():
+    b=[]
+    b.append(rect(14,14,78,24,'th-faint')); b.append(dot(20,26,2,'th-ink-f'))
+    b.append(line(26,22,62,22,'th-ink',2)); b.append(line(26,30,50,30,'th-acc',2))
+    b.append(rect(14,44,78,32,'th-faint')); b.append(dot(20,60,2,'th-ink-f'))
+    for i,(h,c) in enumerate([(10,'th-r3'),(16,'th-r2'),(22,'th-r1'),(14,'th-r2')]):
+        b.append(f'<rect x="{30+i*12}" y="{70-h}" width="8" height="{h}" rx="1.4" class="{c}"/>')
+    b.append(rect(14,82,78,24,'th-faint')); b.append(dot(20,94,2,'th-ink-f'))
+    for x,w in ((26,14),(44,10),(58,18)): b.append(f'<rect x="{x}" y="90" width="{w}" height="8" rx="4" class="th-warm-f"/>')
+    b.append('<path d="M96 94 C110 94 110 26 98 26" class="th-acc" stroke-width="2.4" fill="none" marker-end="url(#aha)"/>')
+    return svg(''.join(b))
+
 for name,fn in [('peint',peint),('proactive-agents',proactive),('graphsr',graphsr),('autorec',autorec),('tsnas',tsnas)]:
     (OUT/name/'thumb.svg').write_text(fn())
+for name,fn in [('buffon-polygons',buffon),('notevolve',notevolve)]:
+    (OUT.parent/'blog'/name/'thumb.svg').write_text(fn())
 print('ok')
