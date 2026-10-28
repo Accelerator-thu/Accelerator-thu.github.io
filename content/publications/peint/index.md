@@ -3,8 +3,8 @@ title: 'Deep Models of Protein Evolution in Time Generate Realistic Evolutionary
 
 # Authors
 authors:
-  - Antoine Koehl
-  - Sebastian Prillo
+  - Antoine Koehl*
+  - Sebastian Prillo*
   - Yufan Cao
   - Matthew Liu
   - Junhao Xiong
@@ -48,8 +48,6 @@ hugoblox:
 links:
   - type: preprint
     url: "https://www.biorxiv.org/content/10.64898/2026.02.19.706898v1"
-  - type: dataset
-    url: "https://zenodo.org/records/23315010"
 
 image:
   caption: ''
