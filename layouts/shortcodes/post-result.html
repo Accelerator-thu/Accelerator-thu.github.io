@@ -1,0 +1,13 @@
+{{- /*
+  Highlight a key result in a blog post (styled in custom-styles.html).
+  Usage:
+    {{< post-result label="Main result" note="Convex polygon, perimeter $P$, width below $d$" >}}
+    $$ ... $$
+    {{< /post-result >}}
+  The inner content is passed through untouched, like the math shortcode, so KaTeX sees it.
+*/ -}}
+<div class="post-result">
+  <div class="post-result-label">{{ .Get "label" | default "Result" }}</div>
+  {{- with .Get "note" }}<div class="post-result-note">{{ . }}</div>{{ end }}
+  {{ .Inner | safeHTML }}
+</div>

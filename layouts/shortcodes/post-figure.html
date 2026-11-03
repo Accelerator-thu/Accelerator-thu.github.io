@@ -1,0 +1,11 @@
+{{- /*
+  Inline a theme-aware SVG from the post's bundle, using the .th-* palette shared with
+  the homepage thumbnails (so it adapts to light/dark mode).
+  Usage: {{< post-figure src="setup.svg" caption="…" >}}
+*/ -}}
+{{- with .Page.Resources.Get (.Get "src") }}
+<figure class="post-figure">
+  {{ .Content | safeHTML }}
+  {{- with $.Get "caption" }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+</figure>
+{{- else }}{{ errorf "post-figure: %q not found in %s" (.Get "src") .Page.File.Path }}{{ end }}

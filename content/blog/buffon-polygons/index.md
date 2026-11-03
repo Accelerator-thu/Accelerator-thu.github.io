@@ -24,6 +24,12 @@ The question came up while my advisor was teaching CS70. He mentioned that he wa
 
 Moving from a line segment to a polygon introduces shape, orientation, and direction-dependent width. The probability should therefore depend on an intrinsic geometric quantity of the polygon, such as projected width, area, or perimeter. Under suitable assumptions, the relevant quantity turns out to be the perimeter. We derive this probability in two ways.
 
+{{< post-result label="Main result" note="Convex polygon with perimeter $P$ and width at most the line spacing $d$" >}}
+$$
+P(\text{crossing}) = \frac{P}{\pi d}
+$$
+{{< /post-result >}}
+
 ## The Classical Buffon's Needle Problem
 
 First, establish the standard setup.
@@ -43,6 +49,8 @@ $$
 To generalize the problem to a polygon, we first identify what determines the crossing event.
 
 For a rigid object with fixed orientation $\theta$, the probability of crossing one of the parallel horizontal lines is determined by its vertical span, or equivalently its projected width perpendicular to the lines. Denote this width by $w(\theta)$.
+
+{{< post-figure src="setup.svg" caption="At orientation $\theta$ the polygon spans a vertical extent $w(\theta)$. It crosses a line exactly when a line falls inside that extent, and a crossing polygon meets the line at two boundary points." >}}
 
 Assuming the object is small enough that $w(\theta) \le d$ for all $\theta$, the probability of intersection for a fixed orientation is:
 

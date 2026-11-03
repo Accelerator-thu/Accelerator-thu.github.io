@@ -11,22 +11,25 @@
 
   /* ── Blog post typography ───────────────────────────────────────────── */
 
-  /* h2: serif editorial weight with teal underline accent */
+  /* h2: the site's sans heading, hairline rule with a short teal accent
+     (same rule colour as the homepage .pub-group-title). */
   article main > .prose[data-pagefind-body] h2 {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.65rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    line-height: 1.15;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
     color: #1a2332;
     margin-top: 3rem;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.55rem;
-    border-bottom: 2px solid #6FA3A8;
+    margin-bottom: 0.9rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1.5px solid #dde3e5;
+    background: linear-gradient(#6FA3A8, #6FA3A8) left bottom / 2.75rem 3px no-repeat;
   }
 
   .dark article main > .prose[data-pagefind-body] h2 {
     color: #e8ecf0;
-    border-bottom-color: #4a8a8f;
+    border-bottom-color: #2e3a42;
+    background-image: linear-gradient(#4a8a8f, #4a8a8f);
   }
 
   /* h3: small uppercase label style */
@@ -35,7 +38,7 @@
     font-weight: 750;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #6FA3A8;
+    color: #3d7d83;
     margin-top: 2rem;
     margin-bottom: 0.4rem;
   }
@@ -43,6 +46,9 @@
   .dark article main > .prose[data-pagefind-body] h3 {
     color: #7bb8bd;
   }
+
+  /* A rule right before a section heading duplicates the heading's own rule. */
+  article main > .prose[data-pagefind-body] hr:has(+ h2) { display: none; }
 
   /* Horizontal rules: spacious thin separator */
   article main > .prose[data-pagefind-body] hr {
@@ -55,21 +61,53 @@
     border-top-color: #2e3a42;
   }
 
-  /* Display math: subtle background with left accent bar */
+  /* Display math: a soft rounded card, like the homepage publication cards */
   article main > .prose[data-pagefind-body] .katex-display {
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 0.875rem 1.5rem;
-    background: #f5f9f8;
-    border-left: 3px solid #6FA3A8;
-    border-radius: 0 6px 6px 0;
+    padding: 0.85rem 1.5rem;
+    background: #f5f8f9;
+    border: 1px solid #e3e9eb;
+    border-radius: 12px;
     margin: 1.25rem 0;
   }
 
   .dark article main > .prose[data-pagefind-body] .katex-display {
-    background: #1a2630;
-    border-left-color: #4a8a8f;
+    background: #18222b;
+    border-color: #26333d;
   }
+
+  /* Key-result card (layouts/shortcodes/post-result.html) */
+  .post-result {
+    margin: 1.75rem 0;
+    padding: 1rem 1.25rem 0.6rem;
+    border: 1px solid #cfe0e2;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #eef5f6, #f7fafb);
+  }
+  .post-result-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #3d7d83;
+  }
+  .post-result-note { margin-top: 0.2rem; font-size: 0.9rem; color: #56636b; }
+  article main > .prose[data-pagefind-body] .post-result .katex-display {
+    background: none; border: 0; padding: 0.25rem 0; margin: 0.4rem 0 0;
+  }
+  .post-result .katex { font-size: 1.3em; color: #003262; }
+  .dark .post-result { border-color: #2c4048; background: linear-gradient(180deg, #172530, #151e26); }
+  .dark .post-result-label { color: #7bb8bd; }
+  .dark .post-result-note { color: #a5b1b9; }
+  .dark .post-result .katex { color: #cfe3f6; }
+
+  /* Inline theme-aware figures (layouts/shortcodes/post-figure.html) */
+  .post-figure { margin: 1.75rem 0; }
+  .post-figure .pub-svg { width: 100%; height: auto; border-radius: 12px; border: 1px solid #e3e9eb; }
+  .dark .post-figure .pub-svg { border-color: #26333d; }
+  .post-figure figcaption { margin-top: 0.6rem; font-size: 0.85rem; line-height: 1.5; color: #6b7780; text-align: center; }
+  .dark .post-figure figcaption { color: #8d99a1; }
 
   /* Lead paragraph immediately after an h2 */
   article main > .prose[data-pagefind-body] h2 + p {
@@ -119,9 +157,9 @@
   .pub-thumb { flex: 0 0 auto; }
 
   /* Inline SVG thumbnails: palette tokens, redefined for dark mode. */
-  .pub-thumb { --th-bg: #f2f6f8; --th-ink: #193561; --th-acc: #3f8f96; --th-warm: #e07a3a;
+  .pub-thumb, .post-figure { --th-bg: #f2f6f8; --th-ink: #193561; --th-acc: #3f8f96; --th-warm: #e07a3a;
                --th-faint: #b9c6cd; --th-r1: #255c99; --th-r2: #6FA3A8; --th-r3: #a7b8c4; --th-r4: #193561; }
-  .dark .pub-thumb { --th-bg: #17222b; --th-ink: #dbe6ee; --th-acc: #7bc1c7; --th-warm: #f0955a;
+  .dark .pub-thumb, .dark .post-figure { --th-bg: #17222b; --th-ink: #dbe6ee; --th-acc: #7bc1c7; --th-warm: #f0955a;
                      --th-faint: #3d4d58; --th-r1: #6fa0d6; --th-r2: #7bb8bd; --th-r3: #56697a; --th-r4: #dbe6ee; }
   .pub-svg { display: block; width: 92px; height: 92px; border-radius: 12px; background: var(--th-bg); }
   .blog-thumb { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: var(--th-bg); }
