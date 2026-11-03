@@ -1,0 +1,30 @@
+# Entries for the Misc page, rendered as cards by layouts/shortcodes/misc-cards.html.
+#   thumb: basename of a theme-aware SVG in assets/misc/ (uses the .th-* palette
+#          from layouts/_partials/hooks/head-end/custom-styles.html)
+#   badge: short pill label; links: buttons shown after the badge/year.
+toys:
+  - title: 3D / 4D Four-in-a-Row
+    url: https://accelerator-thu.github.io/3d-chess/
+    thumb: four-in-a-row
+    description: >-
+      Gomoku on a cube — or a tesseract. Line up four stones along any of 13 directions
+      (40 in 4D). Send a friend a link to play online, pass-and-play on one screen,
+      or take on the game AI 🤖
+    badge: Browser game
+    year: 2026
+    links:
+      - name: Play
+        icon: hero/play
+        url: https://accelerator-thu.github.io/3d-chess/
+      - name: Code
+        icon: brands/github
+        url: https://github.com/Accelerator-thu/3d-chess
+
+gallery:
+  - title: Photos
+    url: https://yiihann.github.io/photos/
+    thumb: photos
+    description: >-
+      Moments captured by my girlfriend [Yihan](https://yiihann.github.io/) and our friends:
+      us and the places we've been 📷
+    badge: Photo gallery

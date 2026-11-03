@@ -8,13 +8,16 @@ design:
 
 sections:
   - block: markdown
+    id: toys
     content:
-      title: 'Toy projects'
-      subtitle: 'Small demos and side projects'
+      title: '🧩 Toy Projects'
+      subtitle: ''
       text: |
-        - **[3D Chess](https://accelerator-thu.github.io/3d-chess/)** — Call a friend to play 3D chess in the browser together or play against Game AI 🤖
+        {{< misc-cards group="toys" title="Browser games" >}}
     design:
       columns: '1'
+      spacing:
+        padding: ['4rem', '0', '1rem', '0']
   # - block: markdown
   #   content:
   #     title: "Things I've Driven"
@@ -24,11 +27,14 @@ sections:
   #   design:
   #     columns: '1'
   - block: markdown
+    id: gallery
     content:
-      title: 'Gallery'
+      title: '📷 Gallery'
       subtitle: ''
       text: |
-        - **[Photos](https://yiihann.github.io/photos/)** — Moments captured by my girlfriend [Yihan](https://yiihann.github.io/) and our friends: us and the places we've been 📷
+        {{< misc-cards group="gallery" title="Albums" >}}
     design:
       columns: '1'
+      spacing:
+        padding: ['1rem', '0', '2rem', '0']
 ---

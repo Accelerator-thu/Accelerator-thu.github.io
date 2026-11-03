@@ -1,0 +1,38 @@
+{{- /*
+  Render a group of Misc-page entries as cards matching the homepage publication cards.
+  Usage: {{< misc-cards group="toys" title="Browser games" >}}
+  Data: data/misc.yaml (one list per group); thumbnails: assets/misc/<thumb>.svg.
+*/ -}}
+{{- $group := .Get "group" -}}
+{{- $title := .Get "title" -}}
+{{- with index site.Data.misc $group }}
+<section class="pub-group not-prose">
+  {{- with $title }}<h3 class="pub-group-title">{{ . }}</h3>{{ end }}
+  {{- range . }}
+  {{- $item := . }}
+  <article class="pub-card">
+    {{- with .thumb }}{{ with resources.Get (printf "misc/%s.svg" .) }}
+    <a class="pub-thumb" href="{{ $item.url }}" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">{{ .Content | safeHTML }}</a>
+    {{- end }}{{ end }}
+    <div class="pub-body">
+      <a class="pub-title" href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+      {{- with .description }}<div class="misc-desc">{{ . | markdownify }}</div>{{ end }}
+      <div class="pub-meta">
+        {{- with .badge }}<span class="pub-venue">{{ . }}</span>{{ end }}
+        {{- with .year }}<span class="pub-year">{{ . }}</span>{{ end }}
+        {{- with .links }}
+        <span class="pub-links">
+          {{- range . }}
+          <a class="hb-attachment-link hb-attachment-link-small" href="{{ .url }}" target="_blank" rel="noopener">
+            {{ partial "functions/get_icon" (dict "name" (.icon | default "hero/link") "attributes" "style=\"height: 1em\" class='inline-block'") }}
+            {{ .name }}
+          </a>
+          {{- end }}
+        </span>
+        {{- end }}
+      </div>
+    </div>
+  </article>
+  {{- end }}
+</section>
+{{- end }}

@@ -85,6 +85,9 @@
   /* Widen the homepage text columns beyond the theme's 65ch max-w-prose wrapper. */
   #papers > div.max-w-prose, #papers .prose { max-width: 72rem; }
   #research > div.max-w-prose, #research .prose { max-width: 60rem; }
+  #toys > div.max-w-prose, #toys .prose,
+  #gallery > div.max-w-prose, #gallery .prose { max-width: 60rem; }
+  #toys .prose, #gallery .prose { width: 100%; }
 
   .pub-group { margin: 0 auto 1.75rem; text-align: left; }
 
@@ -164,6 +167,12 @@
   .dark .pub-authors { color: #a5b1b9; }
   .pub-me { white-space: nowrap; font-weight: 700; color: #1a2332; text-decoration: underline; text-decoration-color: #6FA3A8; text-decoration-thickness: 2px; text-underline-offset: 3px; }
   .dark .pub-me { color: #eef2f5; }
+
+  /* Misc-page cards (layouts/shortcodes/misc-cards.html) reuse .pub-card; body text: */
+  .misc-desc { margin-top: 0.3rem; font-size: 0.88rem; line-height: 1.55; color: #56636b; }
+  .misc-desc p { margin: 0; }
+  .misc-desc a { color: inherit; text-decoration: underline; text-decoration-color: #6FA3A8; text-underline-offset: 2px; }
+  .dark .misc-desc { color: #a5b1b9; }
 
   .pub-note { font-size: 0.7em; margin-left: 1px; }
   .pub-footnote { font-size: 0.75rem; color: #8a959c; margin-top: 0.1rem; }
