@@ -102,6 +102,74 @@
   .dark .post-result-note { color: #a5b1b9; }
   .dark .post-result .katex { color: #cfe3f6; }
 
+  .post-result-body > :first-child { margin-top: 0.35rem; }
+  .post-result-body > :last-child { margin-bottom: 0.4rem; }
+  .post-result-body { font-size: 0.98rem; }
+  .post-result-body ol, .post-result-body ul { margin-top: 0.4rem; }
+
+  /* Blockquotes (questions, theorems) as soft cards with a teal edge */
+  article main > .prose[data-pagefind-body] blockquote {
+    margin: 1.5rem 0;
+    padding: 0.85rem 1.2rem;
+    border: 1px solid #cfe0e2;
+    border-left: 3px solid #6FA3A8;
+    border-radius: 12px;
+    background: #f5f8f9;
+    font-style: normal;
+    color: #2f3a41;
+  }
+  article main > .prose[data-pagefind-body] blockquote p::before,
+  article main > .prose[data-pagefind-body] blockquote p::after { content: none; }
+  article main > .prose[data-pagefind-body] blockquote p { margin: 0.25rem 0; }
+  .dark article main > .prose[data-pagefind-body] blockquote {
+    border-color: #2c4048; border-left-color: #4a8a8f; background: #18222b; color: #c9d3da;
+  }
+
+  /* Series navigator (layouts/shortcodes/post-series.html) */
+  .post-series {
+    margin: 0.5rem 0 2rem;
+    padding: 0.9rem 1.1rem 0.7rem;
+    border: 1px solid #e3e9eb;
+    border-radius: 12px;
+    background: #f5f8f9;
+  }
+  .post-series-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #3d7d83;
+  }
+  .post-series-title { margin-top: 0.15rem; font-size: 0.95rem; font-weight: 650; color: #1a2332; }
+  .post-series ol { list-style: none; margin: 0.6rem 0 0; padding: 0; counter-reset: part; }
+  .post-series li {
+    counter-increment: part; display: flex; gap: 0.6rem; align-items: baseline;
+    margin: 0; padding: 0.28rem 0; font-size: 0.9rem; line-height: 1.4; border-top: 1px solid #e3e9eb;
+  }
+  .post-series li::before {
+    content: counter(part); flex: 0 0 1.4rem; height: 1.4rem; display: inline-grid; place-items: center;
+    border-radius: 999px; background: #e8f0f7; color: #003262; font-size: 0.75rem; font-weight: 700;
+  }
+  .post-series li a { color: #003262; text-decoration: none; }
+  .post-series li a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .post-series li.current { font-weight: 700; color: #1a2332; }
+  .post-series li.current::before { background: #003262; color: #fff; }
+  .post-series li.upcoming { color: #8a959c; }
+  .dark .post-series { background: #18222b; border-color: #26333d; }
+  .dark .post-series li { border-top-color: #26333d; }
+  .dark .post-series-label { color: #7bb8bd; }
+  .dark .post-series-title, .dark .post-series li.current { color: #e8ecf0; }
+  .dark .post-series li::before { background: #1d2e3f; color: #cfe3f6; }
+  .dark .post-series li.current::before { background: #9cc7f0; color: #0b1a2a; }
+  .dark .post-series li a { color: #9cc7f0; }
+  .dark .post-series li.upcoming { color: #6f7d87; }
+
+  /* Embedded interactive demos */
+  .post-demo { margin: 1.5rem 0; }
+  .post-demo iframe { display: block; width: 100%; height: 760px; border: 1px solid #e3e9eb; border-radius: 12px; background: #f6f8fa; }
+  .post-demo p { margin: 0.45rem 0 0; font-size: 0.85rem; color: #6b7780; }
+  .dark .post-demo iframe { border-color: #26333d; background: #0e141a; }
+  /* Initial height; the flow explorer then sizes its own frame to its content. */
+  .post-demo-flow iframe { height: 880px; }
+  @media (max-width: 720px) { .post-demo-flow iframe { height: 1200px; } }
+  .dark .post-demo p { color: #8d99a1; }
+
   /* Inline theme-aware figures (layouts/shortcodes/post-figure.html) */
   .post-figure { margin: 1.75rem 0; }
   .post-figure .pub-svg { width: 100%; height: auto; border-radius: 12px; border: 1px solid #e3e9eb; }
@@ -172,6 +240,7 @@
   .pub-svg .th-faint { stroke: var(--th-faint); }
   .pub-svg .th-faint-f { fill: var(--th-faint); }
   .pub-svg .th-bg    { stroke: var(--th-bg); }
+  .pub-svg .th-bg-f  { fill: var(--th-bg); }
   .pub-svg .th-r1 { fill: var(--th-r1); } .pub-svg .th-r2 { fill: var(--th-r2); }
   .pub-svg .th-r3 { fill: var(--th-r3); } .pub-svg .th-r4 { fill: var(--th-r4); }
   .pub-thumb img {

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What a twist does to space</title>
+<script>
+// Follow the site's light/dark setting (shared localStorage key), else the system.
+(function () {
+  var t = null;
+  try { t = localStorage.getItem("wc-color-theme"); } catch (e) {}
+  if (t !== "dark" && t !== "light") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  document.documentElement.dataset.theme = t;
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+:root{
+  /* Palette and type follow accelerator-thu.github.io; w/v/rot/par keep their meaning. */
+  --paper:#F6F8FA; --ink:#1A2332; --dim:#56636B; --rule:#DDE3E5; --well:#EEF2F4; --card:#FFFFFF; --sub:#2F3A41;
+  --w:#0F8A94; --v:#C68A00; --rot:#B8327A; --par:#6B4FD1; --field:#8A97A6;
+  --grid1:#C3CAD3; --grid2:#DDE2E8; --m0:#1A2332; --m1:#C0392B; --m2:#2E8B57; --m3:#3B6FB6;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --serif: KaTeX_Math, 'Times New Roman', Georgia, serif;
+  --mono: ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  color-scheme: light;
+}
+:root[data-theme="dark"]{
+  --paper:#0E141A; --ink:#E8ECF0; --dim:#A5B1B9; --rule:#2E3A42; --well:#18222B; --card:#151E26; --sub:#C9D3DA;
+  --w:#4FB8C1; --v:#E3AE3A; --rot:#E07DB3; --par:#A291F0; --field:#6F7D8A;
+  --grid1:#3A4753; --grid2:#25303A; --m0:#E8ECF0; --m1:#F07A6C; --m2:#5CC48A; --m3:#7FA8E8;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 var(--sans)}
+.app{display:grid;grid-template-columns:minmax(0,1fr) 430px;height:100vh}
+#view{position:relative;min-height:0;border-right:1px solid var(--rule)}
+#view canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+#view canvas:active{cursor:grabbing}
+.hint{position:absolute;left:14px;bottom:10px;font-size:13px;color:var(--dim);pointer-events:none}
+.panel{overflow-y:auto;padding:26px 26px 60px}
+h1{font-size:1.65rem;line-height:1.15;font-weight:600;margin:0 0 .45rem;letter-spacing:-.01em}
+.lede{margin:0 0 1.2rem;color:var(--sub);max-width:36em}
+h2{font-size:1.05rem;font-weight:600;margin:1.6rem 0 .4rem}
+i.m{font-style:italic;font-family:var(--serif)}
+.presets{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.1rem}
+button,select{font:inherit;font-size:14px;color:var(--ink);background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:5px 10px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--w);outline-offset:2px}
+.tabs{display:flex;border-bottom:1px solid var(--rule);margin-bottom:.7rem}
+.tabs button{border:0;border-bottom:2px solid transparent;border-radius:0;background:none;padding:6px 12px 7px;font-size:15px;color:var(--dim)}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.row{display:grid;grid-template-columns:8.6em 1fr 3.6em;align-items:center;gap:10px;margin:3px 0}
+.row label{font-size:14.5px}
+.row output{font:13px var(--mono);text-align:right;color:var(--sub)}
+input[type=range]{width:100%;accent-color:var(--w)}
+.sub{font-size:13.5px;color:var(--dim);margin:.2rem 0 .5rem}
+.group-gap{height:8px}
+.time{display:grid;grid-template-columns:auto 1fr 5.4em auto;gap:10px;align-items:center;margin:1.2rem 0 .8rem;padding:10px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.time output{font:13px var(--mono);text-align:right}
+.key{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px;font-size:14px;margin:.4rem 0 1rem}
+.key label,.key span.item{display:flex;align-items:center;gap:7px}
+.sw{display:inline-block;width:18px;height:3px;border-radius:2px;flex:none}
+.insight{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--w);border-radius:12px;padding:10px 14px;font-size:15px;margin:.6rem 0 1rem}
+.readout{display:flex;flex-wrap:wrap;gap:6px 22px}
+.readout pre{margin:0;font:12.5px/1.5 var(--mono);white-space:pre}
+.readout .cap{font:13px var(--sans);color:var(--dim);margin:.4rem 0 .1rem}
+.notes p{margin:.35rem 0 .7rem;max-width:36em}
+.notes .eq{font-style:italic;font-family:var(--serif);white-space:nowrap}
+.tw{color:var(--w)} .tv{color:var(--v)} .tr{color:var(--rot)} .tp{color:var(--par)}
+@media (max-width:880px){
+  .app{display:block;height:auto}
+  #view{position:sticky;top:0;height:50vh;z-index:5;border-right:0;border-bottom:1px solid var(--rule);background:var(--paper)}
+  .panel{overflow:visible;padding:18px 16px 70px}
+  h1{font-size:1.4rem}
+}
+</style>
+</head>
+<body>
+<main class="app">
+  <section id="view" aria-label="3D view of the twist">
+    <div class="hint">Drag to orbit. Pinch or scroll to zoom.</div>
+  </section>
+
+  <aside class="panel">
+    <h1>What a twist does to space</h1>
+    <p class="lede">A twist <i class="m">ξ</i> = (<i class="m">v</i>, <i class="m">ω</i>) is a velocity field on all of space. Hold it for time <i class="m">t</i> and every point, including the rigid body, rides a helix around one shared screw axis.</p>
+
+    <div class="presets" id="presets"></div>
+
+    <div class="tabs" role="tablist">
+      <button id="tabTwist" role="tab" aria-selected="true">Twist coordinates</button>
+      <button id="tabScrew" role="tab" aria-selected="false">Screw parameters</button>
+    </div>
+    <div id="twistPane" role="tabpanel"></div>
+    <div id="screwPane" role="tabpanel" hidden>
+      <div id="screwNote" class="sub"></div>
+    </div>
+
+    <div class="time">
+      <button id="play">Pause</button>
+      <input id="t" type="range" min="0" max="6.2832" step="any" value="0" aria-label="time t">
+      <output id="tOut">t = 0.00</output>
+      <select id="rate" aria-label="playback speed">
+        <option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option>
+      </select>
+    </div>
+
+    <div class="key">
+      <span class="item"><span class="sw" style="background:var(--w)"></span><span><i class="m">ω</i> on the screw axis</span></span>
+      <span class="item"><span class="sw" style="background:var(--v)"></span><span><i class="m">v</i> at the origin</span></span>
+      <label><input type="checkbox" id="cDecomp" checked><span class="sw" style="background:var(--rot)"></span>Split <i class="m">v</i> = −<i class="m">ω</i>×<i class="m">q</i> + <i class="m">hω</i></label>
+      <label><input type="checkbox" id="cField" checked><span class="sw" style="background:var(--field)"></span>Velocity field</label>
+      <label><input type="checkbox" id="cPaths" checked><span class="sw" style="background:var(--m1)"></span>Point paths</label>
+      <label><input type="checkbox" id="cPtVel" checked><span class="sw" style="background:var(--m2)"></span>Point velocities</label>
+      <label><input type="checkbox" id="cGhost" checked><span class="sw" style="background:var(--dim);height:1px"></span>Start pose</label>
+    </div>
+
+    <div id="insight" class="insight"></div>
+    <div id="readout" class="readout"></div>
+
+    <article class="notes">
+      <h2>A twist is a field, not an arrow at one place</h2>
+      <p>Every point <i class="m">p</i> of space gets the velocity <span class="eq">v<sub>p</sub> = v + ω × p</span>. Picture the body extended to fill all of space. Then <i class="m tw">ω</i> is its angular velocity, the same everywhere, and <i class="m tv">v</i> is the velocity of whichever body point happens to be passing through the origin right now. It is usually not the velocity of anything you can see, which is why it feels strange.</p>
+
+      <h2>Every twist is a screw</h2>
+      <p>Split <i class="m">v</i> into a part perpendicular to <i class="m">ω</i> and a part along it. The perpendicular part is fake: pick the reference point <span class="eq">q = ω × v / |ω|²</span> instead of the origin and it vanishes. The parallel part is real and cannot be moved away; its size is the pitch <span class="eq">h = ω·v / |ω|²</span>. So any (<i class="m">v</i>, <i class="m">ω</i>) means: spin at rate |<i class="m">ω</i>| about the line through <i class="m">q</i> along <i class="m">ω</i>, while sliding along that line at speed <i class="m">h</i>|<i class="m">ω</i>|. Read backwards, <span class="eq">v = <span class="tr">−ω × q</span> + <span class="tp">hω</span></span>: the magenta arrow is the tangential speed the origin picks up from circling an offset axis, the violet arrow is the slide.</p>
+
+      <h2>The exponential integrates the field</h2>
+      <p>Holding <i class="m">ξ</i> fixed for time <i class="m">t</i> gives <span class="eq">g(t) = exp(ξ̂ t) g(0)</span>. Every point traces a helix around the same axis with the same pitch; only the radius differs. Points on the axis just slide, so speed is smallest there, <span class="eq">|h||ω|</span>, and grows linearly with distance.</p>
+
+      <h2>Things to try</h2>
+      <p>Load the offset-axis preset. The body only rotates, yet <i class="m">v</i> is nonzero. In the screw tab, drag <i class="m">q</i> and watch <i class="m">v</i> change while the motion stays a pure rotation.</p>
+      <p>In the twist tab with <i class="m">ω</i> = (0, 0, 1), drag <i class="m">v<sub>z</sub></i>: that alone sets the pitch. Drag <i class="m">v<sub>x</sub></i> or <i class="m">v<sub>y</sub></i>: the axis moves sideways, the type of motion does not change.</p>
+      <p>Start from any screw and shrink |<i class="m">ω</i>| toward zero with <i class="m">v</i> fixed. The axis runs away to infinity. A pure translation is a rotation about an axis at infinity.</p>
+
+      <h2>Conventions</h2>
+      <p>This is the spatial twist, ordered <i class="m">ξ</i> = (<i class="m">v</i>, <i class="m">ω</i>) as in Murray, Li and Sastry; Lynch and Park write <i class="m">V</i> = (<i class="m">ω</i>, <i class="m">v</i>). The body twist Ad<sub><i class="m">g</i>⁻¹</sub><i class="m">ξ</i> describes the same motion in body axes, and its <i class="m">v</i> is the velocity of the body-frame origin. Changing frames changes <i class="m">v</i> (it behaves like a moment) but never <i class="m">ω</i>, and never the screw axis. The axis is the frame-independent object.</p>
+    </article>
+  </aside>
+</main>
+
+<script>
+(() => {
+const V = (x=0,y=0,z=0) => new THREE.Vector3(x,y,z);
+const $ = s => document.querySelector(s);
+const clamp = (x,a,b) => Math.min(b, Math.max(a, x));
+const css = getComputedStyle(document.documentElement);
+const tok = (name) => css.getPropertyValue('--' + name).trim();
+const PAL = {ink:tok('ink'), dim:tok('dim'), w:tok('w'), v:tok('v'), rot:tok('rot'), par:tok('par'),
+             field:tok('field'), paper:tok('paper')};
+const MARK = [tok('m0'), tok('m1'), tok('m2'), tok('m3')];
+// Re-theme when the site's theme changes: the parent page (if embedded and
+// same-origin) toggles html.dark; standalone, the stored preference changes.
+try {
+  const parentRoot = window.parent !== window && window.parent.document.documentElement;
+  if (parentRoot) new MutationObserver(() => {
+    if (parentRoot.classList.contains('dark') !== (document.documentElement.dataset.theme === 'dark')) location.reload();
+  }).observe(parentRoot, { attributes: true, attributeFilter: ['class'] });
+} catch (e) { /* cross-origin embed: keep the initial theme */ }
+const T_MAX = 2*Math.PI, N = 240;
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ---------- state ----------
+const state = { w: V(0,0,1), v: V(0,-1,0.25), t: 0, playing: !reduced, rate: 1, mode: 'twist' };
+let sc = null;           // cached screw decomposition
+let dirty = true, tDirty = true;
+
+// ---------- twist math ----------
+function screwOf(w, v){
+  const wn = w.length();
+  if (wn < 1e-6){
+    const vn = v.length();
+    return {pure:true, wn:0, vn, s: vn > 1e-9 ? v.clone().divideScalar(vn) : V(0,0,1), h:Infinity, q:V()};
+  }
+  const s = w.clone().divideScalar(wn);
+  const h = w.dot(v)/(wn*wn);
+  const q = V().crossVectors(w, v).divideScalar(wn*wn);   // point on axis closest to origin
+  return {pure:false, wn, s, h, q};
+}
+// exp(ξ̂ t) as a 4x4: translate(-q), rotate about s by θ, translate(q + hθ s)
+function expTwist(t){
+  const M = new THREE.Matrix4();
+  if (sc.pure){ const v = state.v; return M.makeTranslation(v.x*t, v.y*t, v.z*t); }
+  const th = sc.wn*t;
+  const R  = new THREE.Matrix4().makeRotationAxis(sc.s, th);
+  const T1 = new THREE.Matrix4().makeTranslation(-sc.q.x, -sc.q.y, -sc.q.z);
+  const d  = sc.q.clone().addScaledVector(sc.s, sc.h*th);
+  return M.makeTranslation(d.x, d.y, d.z).multiply(R).multiply(T1);
+}
+const velAt = p => V().crossVectors(state.w, p).add(state.v);
+
+// ---------- scene ----------
+const view = $('#view');
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+view.prepend(renderer.domElement);
+const canvas = renderer.domElement;
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(PAL.paper);
+const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 200);
+camera.up.set(0,0,1);
+scene.add(new THREE.AmbientLight(0xffffff, 0.62));
+const sun = new THREE.DirectionalLight(0xffffff, 0.7); sun.position.set(4,-5,9); scene.add(sun);
+
+const grid = new THREE.GridHelper(10, 10, tok('grid1'), tok('grid2'));
+grid.rotation.x = Math.PI/2; scene.add(grid);
+
+function makeLabel(text, color, italic=true, size=0.34){
+  const c = document.createElement('canvas'); c.width = 128; c.height = 64;
+  const g = c.getContext('2d');
+  g.font = `${italic?'italic ':''}600 44px 'Times New Roman', Georgia, serif`;
+  g.fillStyle = color; g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.fillText(text, 64, 34);
+  const tex = new THREE.CanvasTexture(c); tex.minFilter = THREE.LinearFilter;
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({map:tex, depthTest:false, transparent:true}));
+  sp.scale.set(size*2, size, 1); sp.renderOrder = 10; scene.add(sp); return sp;
+}
+function makeThin(color, opacity=1, parent=scene){
+  const a = new THREE.ArrowHelper(V(1,0,0), V(), 1, color);
+  if (opacity < 1) for (const m of [a.line.material, a.cone.material]){ m.transparent = true; m.opacity = opacity; }
+  parent.add(a); return a;
+}
+function setThin(a, origin, vec, scale=1, maxLen=Infinity){
+  let len = vec.length()*scale;
+  if (len < 1e-3){ a.visible = false; return; }
+  a.visible = true; len = Math.min(len, maxLen);
+  a.position.copy(origin); a.setDirection(vec.clone().normalize());
+  const head = Math.min(0.16, 0.35*len); a.setLength(len, head, head*0.55);
+}
+function makeFat(color, r=0.025, parent=scene){
+  const g = new THREE.Group();
+  const mat = new THREE.MeshStandardMaterial({color, emissive:color, emissiveIntensity:0.3, roughness:0.55});
+  const shaft = new THREE.Mesh(new THREE.CylinderGeometry(r, r, 1, 12), mat);
+  const head  = new THREE.Mesh(new THREE.ConeGeometry(r*2.7, 1, 18), mat);
+  g.add(shaft, head); g.userData = {shaft, head}; parent.add(g); return g;
+}
+const Y = V(0,1,0);
+function setFat(a, origin, vec, scale=1){
+  const len = vec.length()*scale;
+  if (len < 1e-3){ a.visible = false; return; }
+  a.visible = true;
+  const {shaft, head} = a.userData, hl = Math.min(0.2, 0.4*len);
+  shaft.scale.set(1, len-hl, 1); shaft.position.set(0, (len-hl)/2, 0);
+  head.scale.set(1, hl, 1);      head.position.set(0, len-hl/2, 0);
+  a.position.copy(origin);
+  a.quaternion.setFromUnitVectors(Y, vec.clone().normalize());
+}
+
+// world frame
+const AX = ['#D98880','#7FBF97','#85A8D6'];
+[V(1,0,0),V(0,1,0),V(0,0,1)].forEach((d,i) => {
+  const a = makeThin(AX[i]); setThin(a, V(), d, 1.25);
+  makeLabel('xyz'[i], AX[i], false, 0.28).position.copy(d.clone().multiplyScalar(1.45));
+});
+const origin = new THREE.Mesh(new THREE.SphereGeometry(0.04, 16, 12), new THREE.MeshBasicMaterial({color:PAL.ink}));
+scene.add(origin);
+
+// screw axis, q, perpendicular foot
+const axisMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 24, 8),
+  new THREE.MeshBasicMaterial({color:PAL.w, transparent:true, opacity:0.8}));
+scene.add(axisMesh);
+const qDot = new THREE.Mesh(new THREE.SphereGeometry(0.05, 16, 12), new THREE.MeshBasicMaterial({color:PAL.w}));
+scene.add(qDot);
+const perpGeo = new THREE.BufferGeometry().setFromPoints([V(), V()]);
+const perp = new THREE.Line(perpGeo, new THREE.LineDashedMaterial({color:PAL.dim, dashSize:0.08, gapSize:0.06}));
+scene.add(perp);
+
+const wArrow = makeFat(PAL.w, 0.03);
+const vArrow = makeFat(PAL.v, 0.03);
+const decompGroup = new THREE.Group(); scene.add(decompGroup);
+const rotArrow = makeFat(PAL.rot, 0.017, decompGroup);
+const parArrow = makeFat(PAL.par, 0.017, decompGroup);
+decompGroup.add(perp);
+const lblW = makeLabel('ω', PAL.w), lblV = makeLabel('v', PAL.v), lblQ = makeLabel('q', PAL.w);
+
+// velocity field on the z = 0 plane
+const fieldGroup = new THREE.Group(); scene.add(fieldGroup);
+const fieldPts = [], fieldArrows = [];
+for (let x=-3; x<=3; x++) for (let y=-3; y<=3; y++){
+  if (x===0 && y===0) continue;
+  fieldPts.push(V(x,y,0)); fieldArrows.push(makeThin(PAL.field, 0.75, fieldGroup));
+}
+
+// rigid body
+const G0 = new THREE.Matrix4().compose(V(1.6,0.9,0.5),
+  new THREE.Quaternion().setFromAxisAngle(V(0,0,1), 0.35), V(1,1,1));
+const boxGeo = new THREE.BoxGeometry(0.9, 0.55, 0.35);
+const faceCols = ['#9FB3C8','#6E859E','#C9D6E3','#8FA3B8','#E4EAF0','#57708A'];
+const body = new THREE.Group(); body.matrixAutoUpdate = false; scene.add(body);
+body.add(new THREE.Mesh(boxGeo, faceCols.map(c => new THREE.MeshStandardMaterial({color:c, roughness:0.75}))));
+body.add(new THREE.LineSegments(new THREE.EdgesGeometry(boxGeo), new THREE.LineBasicMaterial({color:PAL.ink})));
+[V(1,0,0),V(0,1,0),V(0,0,1)].forEach((d,i) => { const a = makeThin(AX[i], 1, body); setThin(a, V(), d, 0.72); });
+const ghost = new THREE.LineSegments(new THREE.EdgesGeometry(boxGeo),
+  new THREE.LineBasicMaterial({color:PAL.dim, transparent:true, opacity:0.5}));
+ghost.matrixAutoUpdate = false; ghost.matrix.copy(G0); scene.add(ghost);
+
+const MARK_LOCAL = [V(0,0,0), V(0.45,0.275,0.175), V(-0.45,-0.275,0.175), V(0.45,-0.275,-0.175)];
+const trailGroup = new THREE.Group(); scene.add(trailGroup);
+const ptVelGroup = new THREE.Group(); scene.add(ptVelGroup);
+const markers = MARK_LOCAL.map((m, i) => {
+  const dot = new THREE.Mesh(new THREE.SphereGeometry(0.045, 14, 10), new THREE.MeshBasicMaterial({color:MARK[i], depthTest:false}));
+  dot.renderOrder = 5; dot.position.copy(m); body.add(dot);
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array((N+1)*3), 3));
+  const faint  = new THREE.Line(geo, new THREE.LineBasicMaterial({color:MARK[i], transparent:true, opacity:0.22}));
+  const geoB = new THREE.BufferGeometry(); geoB.setAttribute('position', geo.attributes.position);
+  const bright = new THREE.Line(geoB, new THREE.LineBasicMaterial({color:MARK[i]}));
+  faint.frustumCulled = bright.frustumCulled = false;
+  trailGroup.add(faint, bright);
+  return {local:m, geo, bright, vel: makeFat(MARK[i], 0.012, ptVelGroup)};
+});
+
+// ---------- rebuild when the twist changes ----------
+function rebuild(){
+  sc = screwOf(state.w, state.v);
+  const {w, v} = state;
+  const showAxis = !sc.pure;
+  [axisMesh, qDot, wArrow, lblW, lblQ].forEach(o => o.visible = showAxis);
+  if (showAxis){
+    axisMesh.position.copy(sc.q); axisMesh.quaternion.setFromUnitVectors(Y, sc.s);
+    qDot.position.copy(sc.q);
+    setFat(wArrow, sc.q, w);
+    lblW.position.copy(sc.q).addScaledVector(sc.s, w.length() + 0.25);
+    lblQ.position.copy(sc.q).add(V(0,0,-0.22));
+    lblQ.visible = sc.q.length() > 0.08;
+    perpGeo.setFromPoints([V(), sc.q]); perp.computeLineDistances();
+    const rot = V().crossVectors(w, sc.q).negate();
+    setFat(rotArrow, V(), rot);
+    setFat(parArrow, rot, w.clone().multiplyScalar(sc.h));
+  } else { rotArrow.visible = parArrow.visible = false; }
+  perp.visible = showAxis;
+  setFat(vArrow, V(), v);
+  lblV.visible = v.length() > 0.05;
+  lblV.position.copy(v).multiplyScalar(1 + 0.25/Math.max(v.length(), 1e-6)).add(V(0,0,0.08));
+
+  fieldPts.forEach((p,i) => setThin(fieldArrows[i], p, velAt(p), 0.28, 0.85));
+
+  for (const mk of markers){
+    const p0 = mk.local.clone().applyMatrix4(G0), arr = mk.geo.attributes.position.array;
+    for (let k=0; k<=N; k++){
+      const p = p0.clone().applyMatrix4(expTwist(T_MAX*k/N));
+      arr[3*k] = p.x; arr[3*k+1] = p.y; arr[3*k+2] = p.z;
+    }
+    mk.geo.attributes.position.needsUpdate = true;
+  }
+  $('#insight').innerHTML = insight();
+}
+
+function updatePose(){
+  const M = expTwist(state.t);
+  body.matrix.multiplyMatrices(M, G0); body.matrixWorldNeedsUpdate = true;
+  const G = body.matrix, cnt = Math.floor(state.t/T_MAX*N) + 1;
+  for (const mk of markers){
+    const p = mk.local.clone().applyMatrix4(G);
+    setFat(mk.vel, p, velAt(p), 0.5);
+    mk.bright.geometry.setDrawRange(0, cnt);
+  }
+  $('#tOut').textContent = `t = ${state.t.toFixed(2)}`;
+  $('#t').value = state.t;
+  readout(M);
+}
+
+// ---------- text ----------
+const f = x => { x = Math.abs(x) < 5e-3 ? 0 : x; return (x < 0 ? '' : ' ') + x.toFixed(2); };
+const fv = a => `(${f(a.x)}, ${f(a.y)}, ${f(a.z)})`;
+function mat(rows){ return rows.map(r => '[' + r.map(f).join(' ') + ' ]').join('\n'); }
+function readout(M){
+  const {w, v, t} = state, e = M.elements;
+  const hat = [[0,-w.z,w.y,v.x],[w.z,0,-w.x,v.y],[-w.y,w.x,0,v.z],[0,0,0,0]];
+  const ex = [0,1,2,3].map(i => [0,1,2,3].map(j => e[j*4+i]));
+  let s = `<div><div class="cap">Twist</div><pre><span class="tw">ω</span> = ${fv(w)}\n<span class="tv">v</span> = ${fv(v)}\n|ω| = ${f(w.length())}</pre></div>`;
+  if (sc.pure){
+    s += `<div><div class="cap">Screw</div><pre>axis at infinity\nh = ∞\ndirection ${fv(sc.s)}</pre></div>`;
+  } else {
+    const th = sc.wn*t;
+    s += `<div><div class="cap">Screw</div><pre>ŝ = ${fv(sc.s)}\n<span class="tw">q</span> = ${fv(sc.q)}\nh = ${f(sc.h)}   θ = |ω|t = ${f(th)}\nslid hθ = ${f(sc.h*th)}</pre></div>`;
+  }
+  s += `<div><div class="cap">ξ̂ ∈ se(3)</div><pre>${mat(hat)}</pre></div>`;
+  s += `<div><div class="cap">exp(ξ̂ t) ∈ SE(3)</div><pre>${mat(ex)}</pre></div>`;
+  $('#readout').innerHTML = s;
+}
+function insight(){
+  const {w, v} = state;
+  if (w.length() < 1e-6 && v.length() < 1e-6) return 'Zero twist. Nothing moves.';
+  if (sc.pure) return `Pure translation (<i>ω</i> = 0). Every point has the same velocity <i>v</i>, so the helices flatten into parallel lines. Think of it as rotation about an axis infinitely far away: as |<i>ω</i>| → 0 with <i>v</i> fixed, <i>q</i> = <i>ω</i>×<i>v</i>/|<i>ω</i>|² runs off to infinity.`;
+  if (Math.abs(sc.h) < 0.005){
+    return sc.q.length() > 0.05
+      ? `Pure rotation (pitch 0) about an axis that misses the origin by ${sc.q.length().toFixed(2)}. Note <i>v</i> ≠ 0 even though nothing slides: <i>v</i> = −<i>ω</i>×<i>q</i> is just the tangential velocity a point at the origin would have while circling that axis.`
+      : `Pure rotation about an axis through the origin, so <i>v</i> = 0: the point at the origin stays put, and <i>v</i> is exactly its velocity.`;
+  }
+  const hand = sc.h > 0 ? 'right-handed (advances along ω)' : 'left-handed (advances against ω)';
+  return `Screw motion, ${hand}. One full turn advances 2π|<i>h</i>| = ${(2*Math.PI*Math.abs(sc.h)).toFixed(2)} along the axis. Points on the axis slide at |<i>h</i>||<i>ω</i>| = ${(Math.abs(sc.h)*sc.wn).toFixed(2)}; every other point moves faster.`;
+}
+
+// ---------- controls ----------
+const ui = {};
+function buildSliders(pane, defs, onInput){
+  for (const d of defs){
+    if (d === 'gap'){ pane.insertAdjacentHTML('beforeend', '<div class="group-gap"></div>'); continue; }
+    const [id, label, min, max] = d;
+    const row = document.createElement('div'); row.className = 'row';
+    row.innerHTML = `<label for="s_${id}">${label}</label><input id="s_${id}" type="range" min="${min}" max="${max}" step="any"><output></output>`;
+    pane.appendChild(row);
+    const input = row.querySelector('input'), out = row.querySelector('output');
+    ui[id] = {input, out};
+    input.addEventListener('input', () => { out.textContent = (+input.value).toFixed(2); onInput(); });
+  }
+}
+const setUI = (id, val) => { ui[id].input.value = val; ui[id].out.textContent = (+ui[id].input.value).toFixed(2); };
+const g = id => +ui[id].input.value;
+
+buildSliders($('#twistPane'), [
+  ['wx','<i>ω</i><sub>x</sub>',-2,2],['wy','<i>ω</i><sub>y</sub>',-2,2],['wz','<i>ω</i><sub>z</sub>',-2,2],'gap',
+  ['vx','<i>v</i><sub>x</sub>',-1.5,1.5],['vy','<i>v</i><sub>y</sub>',-1.5,1.5],['vz','<i>v</i><sub>z</sub>',-1.5,1.5]
+], () => { state.w.set(g('wx'),g('wy'),g('wz')); state.v.set(g('vx'),g('vy'),g('vz')); changed(); });
+
+buildSliders($('#screwPane'), [
+  ['az','Axis azimuth (°)',-180,180],['el','Axis elevation (°)',-90,90],'gap',
+  ['qx','<i>q</i><sub>x</sub>',-3,3],['qy','<i>q</i><sub>y</sub>',-3,3],['qz','<i>q</i><sub>z</sub>',-3,3],'gap',
+  ['h','Pitch <i>h</i>',-1,1],['sp','Spin rate |<i>ω</i>|',0,2]
+], () => {
+  const az = g('az')*Math.PI/180, el = g('el')*Math.PI/180;
+  const s = V(Math.cos(el)*Math.cos(az), Math.cos(el)*Math.sin(az), Math.sin(el));
+  const q = V(g('qx'), g('qy'), g('qz'));
+  state.w.copy(s).multiplyScalar(g('sp'));
+  state.v.crossVectors(state.w, q).negate().addScaledVector(state.w, g('h'));
+  changed();
+});
+
+function syncTwistUI(){ const {w,v} = state; setUI('wx',w.x); setUI('wy',w.y); setUI('wz',w.z); setUI('vx',v.x); setUI('vy',v.y); setUI('vz',v.z); }
+function syncScrewUI(){
+  const s0 = screwOf(state.w, state.v);
+  setUI('az', Math.atan2(s0.s.y, s0.s.x)*180/Math.PI);
+  setUI('el', Math.asin(clamp(s0.s.z,-1,1))*180/Math.PI);
+  setUI('qx', s0.q.x); setUI('qy', s0.q.y); setUI('qz', s0.q.z);
+  setUI('h', s0.pure ? 0 : s0.h); setUI('sp', s0.wn);
+}
+function screwNote(){
+  const s0 = screwOf(state.w, state.v);
+  $('#screwNote').innerHTML = s0.pure
+    ? 'The current twist is a pure translation, which has no finite axis. Moving these sliders replaces it with a screw; use twist coordinates to translate.'
+    : 'Choose the axis line, the pitch, and the spin rate. The twist coordinates follow from <i>v</i> = −<i>ω</i>×<i>q</i> + <i>hω</i>. Any point on the line works as <i>q</i>; the readout shows the one closest to the origin.';
+}
+function changed(){
+  if (state.mode === 'twist') syncScrewUI(); else syncTwistUI();
+  dirty = true;
+}
+function setMode(m){
+  state.mode = m;
+  $('#tabTwist').setAttribute('aria-selected', m === 'twist');
+  $('#tabScrew').setAttribute('aria-selected', m === 'screw');
+  $('#twistPane').hidden = m !== 'twist'; $('#screwPane').hidden = m !== 'screw';
+  if (m === 'screw') screwNote();
+}
+$('#tabTwist').onclick = () => setMode('twist');
+$('#tabScrew').onclick = () => setMode('screw');
+
+const PRESETS = [
+  ['Rotation through origin', [0,0,1], [0,0,0]],
+  ['Rotation, offset axis',   [0,0,1], [0,-1,0]],
+  ['Screw',                   [0,0,1], [0,-1,0.25]],
+  ['Left-handed screw',       [0,0,1], [0,-1,-0.25]],
+  ['Pure translation',        [0,0,0], [0.35,0.2,0.1]],
+  ['Tilted general twist',    [0.3,-0.5,0.8], [0.6,0.4,-0.2]],
+];
+for (const [name, w, v] of PRESETS){
+  const b = document.createElement('button'); b.textContent = name;
+  b.onclick = () => { state.w.set(...w); state.v.set(...v); state.t = 0; syncTwistUI(); syncScrewUI(); screwNote(); dirty = true; };
+  $('#presets').appendChild(b);
+}
+
+$('#play').onclick = () => { state.playing = !state.playing; $('#play').textContent = state.playing ? 'Pause' : 'Play'; };
+$('#play').textContent = state.playing ? 'Pause' : 'Play';
+$('#t').addEventListener('input', e => { state.t = +e.target.value; tDirty = true; });
+$('#rate').onchange = e => state.rate = +e.target.value;
+const bindToggle = (id, obj) => { const c = $(id); obj.visible = c.checked; c.onchange = () => obj.visible = c.checked; };
+bindToggle('#cField', fieldGroup); bindToggle('#cPaths', trailGroup); bindToggle('#cPtVel', ptVelGroup);
+bindToggle('#cDecomp', decompGroup); bindToggle('#cGhost', ghost);
+
+// ---------- camera: orbit / zoom, mouse + touch ----------
+const cam = {r: 11, th: -1.0, ph: 1.08, target: V(0.4, 0, 0.5)};
+function placeCam(){
+  const {r, th, ph, target:c} = cam;
+  camera.position.set(c.x + r*Math.sin(ph)*Math.cos(th), c.y + r*Math.sin(ph)*Math.sin(th), c.z + r*Math.cos(ph));
+  camera.lookAt(c);
+}
+const ptrs = new Map(); let pinch0 = null;
+canvas.addEventListener('pointerdown', e => { canvas.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, {x:e.clientX, y:e.clientY}); });
+canvas.addEventListener('pointermove', e => {
+  const p = ptrs.get(e.pointerId); if (!p) return;
+  if (ptrs.size === 1){
+    cam.th -= (e.clientX - p.x)*0.008;
+    cam.ph = clamp(cam.ph - (e.clientY - p.y)*0.008, 0.05, Math.PI - 0.05);
+  }
+  p.x = e.clientX; p.y = e.clientY;
+  if (ptrs.size === 2){
+    const [a, b] = [...ptrs.values()], d = Math.hypot(a.x-b.x, a.y-b.y);
+    if (pinch0) cam.r = clamp(cam.r*pinch0/d, 3, 40);
+    pinch0 = d;
+  }
+});
+const lift = e => { ptrs.delete(e.pointerId); pinch0 = null; };
+canvas.addEventListener('pointerup', lift); canvas.addEventListener('pointercancel', lift);
+canvas.addEventListener('wheel', e => { e.preventDefault(); cam.r = clamp(cam.r*Math.exp(e.deltaY*0.001), 3, 40); }, {passive:false});
+
+new ResizeObserver(() => {
+  const w = view.clientWidth, h = view.clientHeight;
+  renderer.setSize(w, h, false); canvas.style.width = '100%'; canvas.style.height = '100%';
+  camera.aspect = w/Math.max(h,1); camera.updateProjectionMatrix();
+}).observe(view);
+
+// ---------- loop ----------
+syncTwistUI(); syncScrewUI(); setMode('twist');
+let last = performance.now();
+function frame(now){
+  const dt = Math.min(0.05, (now - last)/1000); last = now;
+  if (state.playing){ state.t += dt*state.rate; if (state.t > T_MAX) state.t = 0; tDirty = true; }
+  if (dirty){ rebuild(); dirty = false; tDirty = true; }
+  if (tDirty){ updatePose(); tDirty = false; }
+  placeCam(); renderer.render(scene, camera);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
