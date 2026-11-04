@@ -3,7 +3,7 @@ title: "Reinventing the Twist"
 subtitle: "How you could have discovered the matrix exponential, Lie algebras, screw axes, and Chasles' theorem yourself"
 summary: "Starting from one question about moving a book, we reinvent the matrix exponential, the Lie bracket, Rodrigues' formula, twists, Plücker coordinates and dual numbers, and arrive at Chasles' theorem: every rigid motion is a screw."
 date: 2026-10-27
-draft: true
+draft: false
 
 authors:
   - me
@@ -328,7 +328,7 @@ This is the asymmetry from Section 1 paying off. Rotations need a center. A twis
 
 ### What every observer agrees on
 
-We just found an invariant by asking what a change of origin cannot affect. Let's do this systematically. A general change of frame by a rigid motion $(R, d)$ acts on twists as
+We just found an invariant by asking what a change of origin cannot affect. Let's do this systematically. Moving a twist by a rigid motion $(R, d)$, carrying its whole velocity field along, acts on it as
 
 {{< math >}}
 $$
@@ -336,7 +336,7 @@ $$
 $$
 {{< /math >}}
 
-(This is the **adjoint action**, $\hat\xi \mapsto g\,\hat\xi\, g^{-1}$.) The angular velocity just rotates. $v$ picks up $d \times R\omega$, so $v$ behaves like the **moment** of a force: it depends on the point you measure it about.
+(This is the **adjoint action**, $\hat\xi \mapsto g\,\hat\xi\, g^{-1}$. Re-describing a fixed twist in a new frame is the inverse operation, which is why moving the origin to $d$ in Section 5 gave $v + \omega \times d$ rather than $v + d \times \omega$.) The angular velocity just rotates. $v$ picks up $d \times R\omega$, so $v$ behaves like the **moment** of a force: it depends on the point you measure it about.
 
 There are exactly two independent quantities every observer agrees on:
 
