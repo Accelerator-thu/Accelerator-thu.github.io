@@ -10,7 +10,7 @@ sections:
   - block: collection
     content:
       title: Blogs
-      text: ''
+      text: 'Notes on my research in biological sequence modeling, and on whatever else in the natural sciences and engineering I happen to be learning.'
       filters:
         folders:
           - blog
